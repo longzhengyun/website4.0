@@ -1,0 +1,15 @@
+{
+  "name": "佳瑞网-个人网站",
+  "short_name": "佳瑞网",
+  "icons": [
+    {
+      "src": "/img/logo.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#fff",
+  "theme_color": "#c00"
+}
