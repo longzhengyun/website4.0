@@ -1,17 +1,141 @@
 <template>
-  <keep-alive>
+  <div class="app-wrap">
+    <header-component :config="curHeaderConfig" />
     <router-view />
-  </keep-alive>
+    <menu-component :data="menuData" :config="curMenuConfig" />
+  </div>
 </template>
 
 <script lang="ts">
-  import Vue from 'vue';
   import 'mescroll.js/mescroll.min.css';
+  import '@/assets/main.css';
+  import { Vue, Watch, Component } from 'vue-property-decorator';
 
-  export default Vue.extend({});
+  import HeaderComponent from './components/common/header.vue';
+  import MenuComponent from './components/common/menu.vue';
+
+  @Component({
+    components: {
+      HeaderComponent,
+      MenuComponent,
+    },
+  })
+  export default class App extends Vue {
+    // data
+    private curHeaderConfig: any = {};
+    private curMenuConfig: any = {};
+
+    // computed
+    get headerConfig(this: any) {
+      return this.$store.state.headerConfig;
+    }
+
+    get menuData(this: any) {
+      return this.$store.state.menuData;
+    }
+
+    get menuConfig(this: any) {
+      return this.$store.state.menuConfig;
+    }
+
+    @Watch('$route')
+    private onRouteChanged(this: any, val: any) {
+      this.setHeaderConfig(val);
+      this.setMenuConfig(val);
+    }
+
+    private mounted() {
+      this.setConfig();
+    }
+
+    // methods
+    private setConfig(this: any) {
+      this.setHeaderConfig(this.$route);
+      this.setMenuConfig(this.$route);
+    }
+
+    private setHeaderConfig(route: any) {
+      const name: string = route.name;
+      let config: any = {};
+
+      // home
+      if (name === 'home') {
+        config = {
+          showHeader: false,
+        };
+      }
+
+      // novel
+      if (name === 'novel') {
+        config = {
+          showHeader: true,
+          showBack: false,
+          title: '小说',
+        };
+      }
+
+      // site
+      if (name === 'site') {
+        config = {
+          showHeader: true,
+          showBack: false,
+          title: '推荐网站',
+        };
+      }
+
+      // me
+      if (name === 'me') {
+        config = {
+          showHeader: true,
+          showBack: false,
+          title: '我的',
+        };
+      }
+
+      this.curHeaderConfig = Object.assign({}, this.headerConfig, config);
+    }
+
+    private setMenuConfig(route: any) {
+      const name = route.name;
+      let config = {};
+
+      // home
+      if (name === 'home') {
+        config = {
+          showMenu: true,
+          currentIndex: 0,
+        };
+      }
+
+      // novel
+      if (name === 'novel') {
+        config = {
+          showMenu: true,
+          currentIndex: 1,
+        };
+      }
+
+      // site
+      if (name === 'site') {
+        config = {
+          showMenu: true,
+          currentIndex: 2,
+        };
+      }
+
+      // me
+      if (name === 'me') {
+        config = {
+          showMenu: true,
+          currentIndex: 3,
+        };
+      }
+
+      this.curMenuConfig = Object.assign({}, this.menuConfig, config);
+    }
+  }
 </script>
 
-
-<style>
-article,aside,blockquote,body,button,code,dd,details,div,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}body,button,input,select,textarea{font:400 .3rem/1.5 -apple-system,BlinkMacSystemFont,PingFang SC,Helvetica Neue,STHeiti,Microsoft Yahei,Tahoma,Simsun,sans-serif;color:#333}article,aside,details,figcaption,figure,footer,header,hgroup,iframe,menu,nav,section{display:block}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:500}address,cite,dfn,em,i,var{font-style:normal;font-weight:400}dfn{font-family:Arial}ol,ul{list-style:none}pre{white-space:pre-wrap;word-wrap:break-word}img{max-width:100%;height:auto}a{color:#333;text-decoration:none}button,fieldset,img,input{border:0}button,input,select,textarea{font-size:100%}button,input[type=button],input[type=submit]{line-height:normal!important}table{border-collapse:collapse;border-spacing:0}input,textarea{border:0;background:transparent;-webkit-box-sizing:border-box;box-sizing:border-box;outline:0;-webkit-appearance:none;border-radius:0}body{overflow-x:hidden;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-font-smoothing:antialiased;-webkit-user-select:none;user-select:none;-webkit-overflow-scrolling:touch;background-color:#eee}:focus{outline:0}.ellips{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.clearfix:after{clear:both;content:"";display:block;height:0;visibility:hidden;line-height:0}.section{display:flex}
+<style scoped>
+  .app-wrap{display:flex;flex-direction:column;height:100%;}
 </style>

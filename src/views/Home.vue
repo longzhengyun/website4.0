@@ -1,46 +1,24 @@
 <template>
-  <div>
-    <mescroll class="home">
-      <top />
-      <tab />
-    </mescroll>
-  </div>
+    <mescroll-component class="home">
+      <home-logo-component />
+    </mescroll-component>
 </template>
 
 <script lang="ts">
-  import axios from 'axios';
   import { Component, Vue } from 'vue-property-decorator';
 
-  import Tab from '../components/common/Tab.vue';
-  import Top from '../components/common/Top.vue';
-  import Mescroll from '../components/common/Mescroll.vue';
-  console.log(Top)
+  import MescrollComponent from '../components/common/mescroll.vue';
+  import HomeLogoComponent from '../components/home/logo.vue';
+
   @Component({
     components: {
-      Mescroll,
-      Top,
-      Tab,
+      MescrollComponent,
+      HomeLogoComponent,
     },
   })
-  export default class Home extends Vue {
-    // // data
-    // public siteData: any[] = [];
-
-    // // computed
-    // get tabData(this: any) {
-    //   return this.$store.state.tabData;
-    // }
-
-    // // methods
-    // public downCallback(mescroll: any) {
-    //   axios.get('/api?id=site_data').then((res: any) => {
-    //     this.siteData = res.data.db_data || [];
-    //     if (mescroll) {
-    //       mescroll.endSuccess();
-    //     }
-    //   });
-    // }
-
-    // // goTarget(path: string) {}
-  }
+  export default class Home extends Vue {}
 </script>
+
+<style scoped>
+  .home{background-color:#fff;}
+</style>
