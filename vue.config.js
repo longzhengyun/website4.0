@@ -2,7 +2,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://www.jary8.com/static/data/db_config.php',
+        target: '',
         ws: true,
         changeOrigin: true
       }
