@@ -1,18 +1,16 @@
 <template>
-    <mescroll-component class="home">
+    <section class="home">
       <home-logo-component />
-    </mescroll-component>
+    </section>
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
+  import { Vue, Component } from 'vue-property-decorator';
 
-  import MescrollComponent from '../components/common/mescroll.vue';
   import HomeLogoComponent from '../components/home/logo.vue';
 
   @Component({
     components: {
-      MescrollComponent,
       HomeLogoComponent,
     },
   })
@@ -20,5 +18,5 @@
 </script>
 
 <style scoped>
-  .home{background-color:#fff;}
+  .home{flex:1;background-color:#fff;}
 </style>

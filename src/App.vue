@@ -1,13 +1,12 @@
 <template>
-  <div class="app-wrap">
+  <section class="app-wrap">
     <header-component :config="curHeaderConfig" />
     <router-view />
     <menu-component :data="menuData" :config="curMenuConfig" />
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
-  import 'mescroll.js/mescroll.min.css';
   import '@/assets/main.css';
   import { Vue, Watch, Component } from 'vue-property-decorator';
 
@@ -29,21 +28,21 @@
     get headerConfig(this: any) {
       return this.$store.state.headerConfig;
     }
-
     get menuData(this: any) {
       return this.$store.state.menuData;
     }
-
     get menuConfig(this: any) {
       return this.$store.state.menuConfig;
     }
 
+    // watch
     @Watch('$route')
     private onRouteChanged(this: any, val: any) {
       this.setHeaderConfig(val);
       this.setMenuConfig(val);
     }
 
+    // mounted
     private mounted() {
       this.setConfig();
     }
@@ -53,7 +52,6 @@
       this.setHeaderConfig(this.$route);
       this.setMenuConfig(this.$route);
     }
-
     private setHeaderConfig(route: any) {
       const name: string = route.name;
       let config: any = {};
@@ -92,26 +90,32 @@
         };
       }
 
+      // 如果在iframe中 隐藏header
+      if (window.self !== window.top) {
+        config = {
+          showHeader: false,
+        };
+      }
+
       this.curHeaderConfig = Object.assign({}, this.headerConfig, config);
     }
-
     private setMenuConfig(route: any) {
       const name = route.name;
       let config = {};
 
       // home
-      if (name === 'home') {
-        config = {
-          showMenu: true,
-          currentIndex: 0,
-        };
-      }
+      // if (name === 'home') {
+      //   config = {
+      //     showMenu: false,
+      //     currentIndex: 0,
+      //   };
+      // }
 
       // novel
       if (name === 'novel') {
         config = {
           showMenu: true,
-          currentIndex: 1,
+          currentIndex: 0,
         };
       }
 
@@ -119,7 +123,7 @@
       if (name === 'site') {
         config = {
           showMenu: true,
-          currentIndex: 2,
+          currentIndex: 1,
         };
       }
 
@@ -127,7 +131,7 @@
       if (name === 'me') {
         config = {
           showMenu: true,
-          currentIndex: 3,
+          currentIndex: 2,
         };
       }
 

@@ -4,6 +4,7 @@ import Home from './views/Home.vue';
 import Novel from './views/Novel.vue';
 import Site from './views/Site.vue';
 import Me from './views/Me.vue';
+import WebView from './views/WebView.vue';
 
 Vue.use(Router);
 
@@ -30,6 +31,15 @@ export default new Router({
       path: '/me',
       name: 'me',
       component: Me,
+    },
+    {
+      path: '/webview',
+      name: 'webview',
+      component: WebView,
+    },
+    {
+      path: '*',
+      redirect: '/',
     },
   ],
 });

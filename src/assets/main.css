@@ -1,4 +1,18 @@
-article,aside,blockquote,body,button,code,dd,details,div,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}body,button,input,select,textarea{font:400 .3rem/1.5 -apple-system,BlinkMacSystemFont,PingFang SC,Helvetica Neue,STHeiti,Microsoft Yahei,Tahoma,Simsun,sans-serif;color:#333}article,aside,details,figcaption,figure,footer,header,hgroup,iframe,menu,nav,section{display:block}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:500}address,cite,dfn,em,i,var{font-style:normal;font-weight:400}dfn{font-family:Arial}ol,ul{list-style:none}pre{white-space:pre-wrap;word-wrap:break-word}img{max-width:100%;height:auto}a{color:#333;text-decoration:none}button,fieldset,img,input{border:0}button,input,select,textarea{font-size:100%}button,input[type=button],input[type=submit]{line-height:normal!important}table{border-collapse:collapse;border-spacing:0}input,textarea{border:0;background:transparent;-webkit-box-sizing:border-box;box-sizing:border-box;outline:0;-webkit-appearance:none;border-radius:0}body{overflow-x:hidden;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-font-smoothing:antialiased;-webkit-user-select:none;user-select:none;-webkit-overflow-scrolling:touch;background-color:#eee}:focus{outline:0}.ellips{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.clearfix:after{clear:both;content:"";display:block;height:0;visibility:hidden;line-height:0}.section{display:flex}
+article,aside,blockquote,body,button,code,dd,details,div,dl,dt,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,hr,input,legend,li,menu,nav,ol,p,pre,section,td,textarea,th,ul{margin:0;padding:0}body,button,input,select,textarea{font:400 .3rem/1.5 -apple-system,BlinkMacSystemFont,PingFang SC,Helvetica Neue,STHeiti,Microsoft Yahei,Tahoma,Simsun,sans-serif;color:#333}article,aside,details,figcaption,figure,footer,header,hgroup,iframe,menu,nav,section{display:block}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:500}address,cite,dfn,em,i,var{font-style:normal;font-weight:400}dfn{font-family:Arial}ol,ul{list-style:none}pre{white-space:pre-wrap;word-wrap:break-word}img{max-width:100%;height:auto}a{color:#333;text-decoration:none}button,fieldset,img,input{border:0}button,input,select,textarea{font-size:100%}button,input[type=button],input[type=submit]{line-height:normal!important}table{border-collapse:collapse;border-spacing:0}input,textarea{border:0;background:transparent;-webkit-box-sizing:border-box;box-sizing:border-box;outline:0;-webkit-appearance:none;border-radius:0}body{overflow-x:hidden;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-font-smoothing:antialiased;-webkit-user-select:none;user-select:none;-webkit-overflow-scrolling:touch;background-color:#eee}:focus{outline:0}.ellips{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.clearfix:after{clear:both;content:"";display:block;height:0;visibility:hidden;line-height:0}
+
+/* border line */
+.border-top-line::after,
+.border-right-line::after,
+.border-bottom-line::after,
+.border-left-line::after{position:absolute;content:'';background-color:#e1e1e1;}
+.border-top-line::after,
+.border-bottom-line::after{left:0;right:0;height:1px;z-index:10;}
+.border-top-line::after{top:0;}
+.border-bottom-line::after{bottom:0;}
+.border-right-line::after,
+.border-left-line::after{top:0;bottom:0;width:1px;z-index:10;}
+.border-right-line::after{right:0;}
+.border-left-line::after{left:0;}
 
 /* font icon | 字体图标 */
 @font-face {
@@ -43,9 +57,3 @@ article,aside,blockquote,body,button,code,dd,details,div,dl,dt,fieldset,figcapti
 .icon-checkmark:before {content: "\ea10";}
 .icon-circle-right:before {content: "\ea42";}
 .icon-circle-left:before {content: "\ea44";}
-
-.tags-item{display:inline-block;border:1px solid;min-width:.5rem;text-align:center;padding:0 .1rem;border-radius:.06rem;font-size:.24rem;line-height:.48rem;vertical-align:middle;}
-.tags-item1{color:#f7615d;border-color:#f8acaa;}
-.tags-item2{color:#1fcd81;border-color:#8bdab6;}
-.tags-item3{color:#0b9ee7;border-color:#87cbec;}
-.tags-item4{color:#fe8d13;border-color:#f1b97c;}

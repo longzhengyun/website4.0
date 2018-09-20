@@ -1,12 +1,12 @@
 <template>
-  <section v-if="config.showMenu" class="menu-wrap border-top-line">
+  <menu v-if="config.showMenu" class="menu-wrap" :class="{ 'border-top-line': config.hasLine }">
     <ul class="menu-list">
       <li class="list-item" :class="{ 'current': key === config.currentIndex }" v-for="(item, key) in data" :key="key" @click="changeMenu(item.path, key)">
         <i class="item-icon" :class="item.icon"></i>
         <span class="item-text">{{item.name}}</span>
       </li>
     </ul>
-  </section>
+  </menu>
 </template>
 
 <script lang="ts">
@@ -17,7 +17,6 @@
     // props
     @Prop()
     private data!: any[];
-
     @Prop()
     private config!: any;
 

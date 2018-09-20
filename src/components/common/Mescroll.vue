@@ -1,36 +1,43 @@
 <template>
-  <div class="mescroll" id="mescroll">
+  <section class="mescroll" id="mescroll">
     <slot />
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
-  import { Vue, Prop, Component } from 'vue-property-decorator';
+  import { Vue, Prop, Watch, Component } from 'vue-property-decorator';
 
   import MeScroll from 'mescroll.js';
+  import 'mescroll.js/mescroll.min.css';
 
   @Component
   export default class Mescroll extends Vue {
-    // // data
+    // data
     private mescroll: any = null;
 
-    // // props
-    @Prop() private callback!: any;
+    // props
+    @Prop()
+    private config!: object;
 
-    // // methods
-    private initMescroll() {
-      this.mescroll = new MeScroll('mescroll', {
-        down: {
-          callback: this.callback,
-          autoShowLoading: true, // 默认显示下拉刷新进度
-        },
-      });
+    // watch
+    @Watch('config', { immediate: true, deep: true })
+    private onConfigChanged(val: object) {
+      this.initMescroll(val);
     }
 
+    // mounted
     private mounted() {
-      this.initMescroll(); // 初始化mescroll
+      this.initMescroll(this.config); // 初始化mescroll配置
     }
 
+    // methods
+    private initMescroll(config: object) {
+      if (config) {
+        this.mescroll = new MeScroll('mescroll', config);
+      }
+    }
+
+    // beforeDestroy
     private beforeDestroy() {
       if (this.mescroll) {
         this.mescroll.destroy();
@@ -42,4 +49,5 @@
 
 <style scoped>
   .mescroll{flex:1;}
+  .mescroll >>> .mescroll-upwarp{display:none;}
 </style>

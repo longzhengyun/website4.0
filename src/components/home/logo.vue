@@ -1,5 +1,5 @@
 <template>
-  <div class="home-logo animation">
+  <div class="home-logo animation" @click="goTarget">
     <div class="logo1"><img class="img" src="@/assets/logo.png" /></div>
     <p class="line"></p>
     <div class="logo2"><img class="img" src="@/assets/logo.png" /></div>
@@ -10,7 +10,12 @@
   import { Vue, Component } from 'vue-property-decorator';
 
   @Component
-  export default class Logo extends Vue {}
+  export default class Logo extends Vue {
+    // methods
+    private goTarget() {
+      this.$router.push({ path: '/novel' });
+    }
+  }
 </script>
 
 <style scoped>
