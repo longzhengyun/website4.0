@@ -18,8 +18,9 @@
     private data!: any[];
 
     // methods
-    private goTarget(this: any, item: any) {
-      this.$router.push({ path: '/webview?url=' + item.url + '&title=' + item.title });
+    private goTarget(item: any) {
+      // this.$router.push({ path: '/webview?url=' + item.url + '&title=' + item.title });
+      window.location.href = item.url;
     }
   }
 </script>

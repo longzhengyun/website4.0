@@ -39,7 +39,7 @@
   .header-icon{position:absolute;top:50%;}
   .header-back{left:0;width:1rem;height:1rem;transform:translateY(-50%);}
   .header-back::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%, -50%) rotate(-45deg);width:.3rem;height:.3rem;border:1px solid;border-color:#fff transparent transparent #fff;}
-  .header-close{left:.7rem;width:.75rem;height:.75rem;transform:translateY(-50%) rotate(-45deg);}
+  .header-close{left:.7rem;width:.5rem;height:.5rem;transform:translateY(-50%) rotate(-45deg);}
   .header-close::before,
   .header-close::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);background-color:#fff;}
   .header-close::before{width:1px;height:70%;}
