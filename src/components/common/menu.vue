@@ -33,5 +33,5 @@
   .menu-list .list-item{flex:1;padding:.1rem 0;text-align:center;}
   .menu-list .list-item.current{color:#c00;}
   .menu-list .item-icon{display:block;font-size:.48rem;}
-  .menu-list .item-text{font-size:.24rem;}
+  .menu-list .item-text{display:block;font-size:.24rem;}
 </style>

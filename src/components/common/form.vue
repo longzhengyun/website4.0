@@ -19,7 +19,7 @@
     private data!: any[];
 
     // methods
-    private goTarget(path) {
+    private goTarget(path: string) {
       this.$router.push({ path });
     }
   }

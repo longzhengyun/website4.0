@@ -20,6 +20,6 @@
 </script>
 
 <style scoped>
-    .webView{flex:1;-webkit-overflow-scrolling:touch;overflow-y:scroll;}
+    .webView{-webkit-overflow-scrolling:touch;overflow-y:scroll;}
     .iframe{border:0;}
 </style>

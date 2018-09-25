@@ -26,7 +26,5 @@
         }
       });
     }
-
-    // // goTarget(path: string) {}
   }
 </script>

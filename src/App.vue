@@ -1,7 +1,7 @@
 <template>
   <section class="app-wrap">
     <header-component :config="curHeaderConfig" />
-    <router-view />
+    <router-view class="section" />
     <menu-component :data="menuData" :config="curMenuConfig" />
   </section>
 </template>
@@ -66,7 +66,6 @@
       // novel
       if (name === 'novel') {
         config = {
-          showHeader: true,
           showBack: false,
           title: '小说',
         };
@@ -75,7 +74,6 @@
       // site
       if (name === 'site') {
         config = {
-          showHeader: true,
           showBack: false,
           title: '推荐网站',
         };
@@ -84,18 +82,31 @@
       // me
       if (name === 'me') {
         config = {
-          showHeader: true,
           showBack: false,
           title: '我的',
         };
       }
 
-      // 如果在iframe中 隐藏header
-      if (window.self !== window.top) {
+      // about
+      if (name === 'about') {
         config = {
-          showHeader: false,
+          title: '关于佳瑞网',
         };
       }
+
+      // version
+      if (name === 'version') {
+        config = {
+          title: '大事记',
+        };
+      }
+
+      // 如果在iframe中 隐藏header
+      // if (window.self !== window.top) {
+      //   config = {
+      //     showHeader: false,
+      //   };
+      // }
 
       this.curHeaderConfig = Object.assign({}, this.headerConfig, config);
     }

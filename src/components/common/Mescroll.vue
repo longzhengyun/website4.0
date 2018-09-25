@@ -48,6 +48,5 @@
 </script>
 
 <style scoped>
-  .mescroll{flex:1;}
   .mescroll >>> .mescroll-upwarp{display:none;}
 </style>
