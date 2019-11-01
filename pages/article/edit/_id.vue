@@ -9,7 +9,7 @@ export default {
     async asyncData ({ params, $axios }) {
         let id = params.id
         let detail = {}
-        let { data } = await $axios.post('/api/article/detail', { id })
+        let { data } = await $axios.get('/api/article/detail', { params: { id } })
 
         if (data.code === 0) {
             detail = data.data

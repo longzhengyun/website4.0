@@ -1,8 +1,8 @@
 const mysql = require('./../mysql')
 
 module.exports = async function (ctx) {
-    const { body } = ctx.request;
-    let id = Number(body.id);
+    const { query } = ctx.request;
+    const { id = 0 } = query;
 
     let result = {
         code: -1,

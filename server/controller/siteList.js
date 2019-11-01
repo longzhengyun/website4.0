@@ -16,7 +16,7 @@ module.exports = async function (ctx) {
     }
 
     try {
-        let data = await mysql.query(`SELECT id, title, date, description, category, hot FROM article_data ORDER BY id DESC limit ${listIndex}, ${limit}`);
+        let data = await mysql.query(`SELECT * FROM site_data ORDER BY id DESC limit ${listIndex}, ${limit}`);
         if (Array.isArray(data) && data.length > 0) {
             result.code = 0;
             result.msg = '成功';

@@ -35,7 +35,7 @@ export default {
             this.getData(page, mescroll)
         },
         getData (page, mescroll) {
-            this.$axios.post('/api/article/list', { index: (page.num - 1) * 10 + 1 }).then((res) => {
+            this.$axios.get('/api/article/list', { params: { index: (page.num - 1) * 10 + 1 } }).then((res) => {
                 let { code, data } = res.data
                 if (code === 0) {
                     if (page.num === 1) {
