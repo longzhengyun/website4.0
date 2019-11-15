@@ -4,11 +4,15 @@ const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 const router = require('./api')
 
+const authCheck = require('./middleware/authCheck')
+
 const app = new Koa()
 
 app.use(koaBody({
     jsonLimit: '1024kb'
 }));
+
+app.use(authCheck); // 中间件洋葱模型，有顺序要求
 
 app.use(router.routes());
 
