@@ -1,5 +1,5 @@
-const Promise = require("bluebird");
-const jwt = require("jsonwebtoken");
+const Promise = require('bluebird');
+const jwt = require('jsonwebtoken');
 
 const verify = Promise.promisify(jwt.verify);
 

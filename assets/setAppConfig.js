@@ -1,8 +1,6 @@
 const setHeaderConfigAction = (name) => {
     let config = {}
 
-    /* ------------ front ------------- */
-
     // login
     if (name === 'login') {
         config = {
@@ -13,8 +11,7 @@ const setHeaderConfigAction = (name) => {
     // index
     if (name === 'index') {
         config = {
-            showBack: false,
-            title: 'website'
+            showHeader: false
         }
     }
 

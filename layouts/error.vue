@@ -2,14 +2,19 @@
     <section class="container">
         <div class="fail">
             <img src="/img/default_fail.png" class="fail-icon" />
-            <span class="fail-text">Failed to load, check the mobile network</span>
-            <nuxt-link class="button" to="/" v-if="error.statusCode === 404">Back to home</nuxt-link>
+            <span class="fail-text">加载失败，请检查网络是否连接！</span>
+            <nuxt-link class="button" to="/" v-if="error.statusCode === 404">返回首页</nuxt-link>
         </div>
     </section>
 </template>
 <script>
 export default {
     props: ['error'],
+    head () {
+        return {
+            title: '404'
+        }
+    },
     mounted () {
         console.log(this.error.statusCode + ':' + this.error.message)
     }
