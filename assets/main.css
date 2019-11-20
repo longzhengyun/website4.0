@@ -71,21 +71,20 @@ body{overflow-x:hidden;-webkit-text-size-adjust:none;-webkit-tap-highlight-color
 .icon-circle-left:before {content: '\ea44';}
 
 /* border line */
-.border-top-line::after,
+.border-top-line::before,
 .border-right-line::after,
 .border-bottom-line::after,
-.border-left-line::after{position:absolute;content:'';background-color:#f2f2f2;}
-.border-top-line::after,
+.border-left-line::before{position:absolute;content:'';background-color:#ccc;}
+.border-top-line::before,
 .border-bottom-line::after{left:0;right:0;height:1px;z-index:10;transform:scaleY(.5);}
-.border-top-line::after{top:0;}
-.border-bottom-line::after{bottom:0;}
+.border-top-line::before{top:0;}
+.border-bottom-line::after{bottom:-1px;}
 .border-right-line::after,
-.border-left-line::after{top:0;bottom:0;width:1px;z-index:10;transform:scaleX(.5);}
+.border-left-line::before{top:0;bottom:0;width:1px;z-index:10;transform:scaleX(.5);}
 .border-right-line::after{right:0;}
-.border-left-line::after{left:0;}
+.border-left-line::before{left:0;}
 
 /* mescroll */
-.mescroll{flex:1;height:auto;}
 .mescroll-upwarp .bottm-tip{font-size:.24rem;}
 
 /* toast */

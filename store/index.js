@@ -30,7 +30,11 @@ export const state = () => ({
                 url: '/mine'
             }
         ]
-    }
+    },
+    articleTabConfig: {
+        currentIndex: 0,
+        item: ['全部', 'HTML', 'CSS', 'JavaScript', '杂谈']
+    },
 })
 
 export const mutations = {
@@ -39,6 +43,9 @@ export const mutations = {
     },
     menuConfig(state, data) {
         Object.assign(state.menuConfig, data)
+    },
+    articleTabConfig(state, data) {
+        Object.assign(state.articleTabConfig, data)
     },
 }
 

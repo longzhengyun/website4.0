@@ -1,5 +1,5 @@
 <template>
-    <section class="container">
+    <section class="mescroll">
         <div class="index-search">
             <div class="logo">
                 <img class="img" src="~/assets/logo.png" />
@@ -14,27 +14,69 @@
         <div class="list-mode">
             <h2 class="mode-title">推荐文章</h2>
             <nuxt-link class="mode-more" to="/article">MORE</nuxt-link>
-            <div class="mode-cont"></div>
+            <div class="mode-cont">
+                <list-component :data="articleList" type="article" :goTarget="goTarget" />
+            </div>
         </div>
         <div class="list-mode">
             <h2 class="mode-title">推荐网站</h2>
             <nuxt-link class="mode-more" to="/site">MORE</nuxt-link>
-            <div class="mode-cont"></div>
+            <div class="mode-cont">
+                <list-component :data="siteList" type="site" :goTarget="goTarget" />
+            </div>
         </div>
     </section>
 </template>
 
 <script>
-export default {
-    // auth: false,
-    mounted () {},
-    components: {},
-    methods: {
-        goTarget () {
-            this.$router.push({ path: 'search' })
+    import ListComponent from '~/components/home/List';
+
+    export default {
+        async asyncData ({ $axios }) {
+            let articleList = []
+            let siteList = []
+
+            let articleData = await $axios.get('/api/article/hot')
+
+            if (articleData.data.code === 0) {
+                articleList = articleData.data.data
+            }
+
+            let siteData = await $axios.get('/api/site/hot')
+
+            if (siteData.data.code === 0) {
+                siteList = siteData.data.data
+            }
+
+            return {
+                articleList,
+                siteList
+            }
+        },
+        head () {
+            return {
+                title: 'website'
+            }
+        },
+        methods: {
+            goTarget (type, item) {
+                if (type === 'search') {
+                    this.$router.push({ path: '/search' })
+                }
+
+                if (type === 'article') {
+                    this.$router.push({ path: `/article/${item.id}` })
+                }
+
+                if (type === 'site') {
+                    window.location.href = item.url
+                }
+            }
+        },
+        components: {
+            ListComponent
         }
-    }
-};
+    };
 </script>
 
 <style scoped>
@@ -45,7 +87,7 @@ export default {
     .index-search .text{width:100%;height:100%;font-size:.32rem;line-height:.6rem;color:#999;}
     .index-search .submit{position:absolute;top:50%;right:.1rem;transform:translateY(-50%);width:1.25rem;height:.6rem;font-size:.4rem;border-radius:0 .1rem .1rem 0;background-color:#eee;}
 
-    .list-mode{position:relative;margin-top:.2rem;background-color:#fff;}
-    .mode-title{line-height:1rem;padding:0 .4rem;font-size:.4rem;}
+    .list-mode{position:relative;margin-top:.2rem;}
+    .mode-title{line-height:1rem;padding:0 .4rem;font-size:.4rem;background-color:#fff;}
     .mode-more{position:absolute;top:0;right:0;padding:0 .4rem;line-height:1rem;color:#999;}
 </style>

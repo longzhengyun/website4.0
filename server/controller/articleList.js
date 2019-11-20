@@ -1,4 +1,5 @@
-const mysql = require('./../mysql')
+const mysql = require('./../mysql');
+const { FormatDate } = require('./../../assets/utils');
 
 module.exports = async function (ctx) {
     const { query } = ctx.request;
@@ -18,6 +19,10 @@ module.exports = async function (ctx) {
     try {
         let data = await mysql.query(`SELECT id, title, date, description, category, hot FROM article_data ORDER BY id DESC limit ${listIndex}, ${limit}`);
         if (Array.isArray(data) && data.length > 0) {
+            data.map(item => {
+                item.date = FormatDate(new Date(item.date * 1000), 'yyyy-MM-dd');
+            });
+
             result.code = 0;
             result.msg = '成功';
             result.data = data;

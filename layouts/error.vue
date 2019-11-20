@@ -8,17 +8,17 @@
     </section>
 </template>
 <script>
-export default {
-    props: ['error'],
-    head () {
-        return {
-            title: '404'
+    export default {
+        props: ['error'],
+        head () {
+            return {
+                title: '404'
+            }
+        },
+        mounted () {
+            console.log(this.error.statusCode + ':' + this.error.message)
         }
-    },
-    mounted () {
-        console.log(this.error.statusCode + ':' + this.error.message)
     }
-}
 </script>
 
 <style scoped>

@@ -1,11 +1,18 @@
 <template>
-    <div class="nothing-wrap">
-        <img src="/img/default_nothing.png" class="nothing-icon" />
-        <span class="nothing-text">There is no content</span>
+    <div class="model-wrap">
+        <img src="/img/default_nothing.png" class="model-icon" />
+        <span class="model-text">暂无内容</span>
     </div>
 </template>
+
+<script>
+    export default {
+        name: 'Nothing',
+    }
+</script>
+
 <style scoped>
-    .nothing-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);}
-    .nothing-wrap .nothing-icon{display:block;width:2.04rem;height:1.87rem;margin:0 auto;}
-    .nothing-wrap .nothing-text{display:block;text-align:center;margin-top:.3rem;color:#999;}
+    .model-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);}
+    .model-wrap .model-icon{display:block;width:2.04rem;height:1.87rem;margin:0 auto;}
+    .model-wrap .model-text{display:block;text-align:center;margin-top:.3rem;color:#999;}
 </style>
