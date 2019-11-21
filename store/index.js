@@ -29,11 +29,32 @@ export const state = () => ({
                 icon: 'icon-user-tie',
                 url: '/mine'
             }
-        ]
+        ],
     },
     articleTabConfig: {
         currentIndex: 0,
-        item: ['全部', 'HTML', 'CSS', 'JavaScript', '杂谈']
+        item: [
+            {
+                name: '全部',
+                index: 0
+            },
+            {
+                name: 'HTML',
+                index: 1
+            },
+            {
+                name: 'CSS',
+                index: 2
+            },
+            {
+                name: 'JavaScript',
+                index: 3
+            },
+            {
+                name: '杂谈',
+                index: 4
+            },
+        ],
     },
 })
 

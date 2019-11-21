@@ -1,6 +1,6 @@
 <template>
     <mescroll-component :up="mescrollUp" @init="mescrollInit">
-        <tab-component :tabConfig="tabConfig" type="article" />
+        <tab-component :tabConfig="tabConfig" :changeTab="changeTab" />
         <list-component v-if="list.length > 0" :data="list" :goTarget="goTarget" />
         <nothing-component v-else />
     </mescroll-component>
@@ -40,10 +40,15 @@
                 this.mescroll = mescroll
             },
             upCallback (page, mescroll) {
-                this.getData(page, mescroll)
+                this.getData(page, this.tabConfig.currentIndex, mescroll)
             },
-            getData (page, mescroll) {
-                this.$axios.get('/api/article/list', { params: { index: (page.num - 1) * 10 + 1 } }).then((res) => {
+            getData (page, category, mescroll) {
+                this.$axios.get('/api/article/list', {
+                    params: {
+                        index: (page.num - 1) * 10 + 1,
+                        category
+                    }
+                }).then((res) => {
                     let { code, data } = res.data
                     if (code === 0) {
                         if (page.num === 1) {
@@ -60,6 +65,15 @@
                     }
                 }).catch((error) => {
                     mescroll.endErr(error)
+                })
+            },
+            changeTab (index) {
+                this.$store.commit('articleTabConfig', {
+                    currentIndex: index
+                })
+
+                this.$nextTick(() => {
+                    this.mescroll.triggerDownScroll()
                 })
             },
             goTarget (item) {

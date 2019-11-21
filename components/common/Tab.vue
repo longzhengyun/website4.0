@@ -1,7 +1,7 @@
 <template>
     <div class="model-wrap">
         <ul class="model-list border-bottom-line">
-            <li class="model-item" :class="{ 'current': key === tabConfig.currentIndex }" v-for="(item, key) in tabConfig.item" :key="key" @click="changeTab(key)">{{item}}</li>
+            <li class="model-item" :class="{ 'current': item.index === tabConfig.currentIndex }" v-for="(item, key) in tabConfig.item" :key="key" @click="changeTab(item.index)">{{item.name}}</li>
         </ul>
     </div>
 </template>
@@ -9,14 +9,7 @@
 <script>
     export default {
         name: 'Tab',
-        props: ['tabConfig', 'type'],
-        methods: {
-            changeTab (key) {
-                this.$store.commit(`${this.type}TabConfig`, {
-                    currentIndex: key
-                })
-            }
-        }
+        props: ['tabConfig', 'changeTab'],
     }
 </script>
 
