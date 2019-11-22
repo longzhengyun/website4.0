@@ -19,7 +19,7 @@ const setHeaderConfigAction = (name) => {
     if (name === 'article') {
         config = {
             showBack: false,
-            title: 'article'
+            title: '前端文章'
         }
     }
 
@@ -30,10 +30,18 @@ const setHeaderConfigAction = (name) => {
         }
     }
 
-    // article/edit/id
-    if (name === 'article-edit-id') {
+    // article/edit
+    if (name === 'article-edit') {
         config = {
             title: '编辑文章'
+        }
+    }
+
+    // site
+    if (name === 'site') {
+        config = {
+            showBack: false,
+            title: '网站收藏'
         }
     }
 
@@ -41,7 +49,6 @@ const setHeaderConfigAction = (name) => {
     if (name === 'mine') {
         config = {
             showBack: false,
-            showSet: true,
             title: '我的'
         }
     }

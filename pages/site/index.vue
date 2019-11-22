@@ -15,7 +15,7 @@
     export default {
         head () {
             return {
-                title: 'article'
+                title: 'site'
             }
         },
         data () {
@@ -31,7 +31,7 @@
         },
         computed: {
             tabConfig () {
-                return this.$store.state.articleTabConfig
+                return this.$store.state.siteTabConfig
             },
         },
         methods: {
@@ -43,7 +43,7 @@
                 this.getData(page, this.tabConfig.currentIndex, mescroll)
             },
             getData (page, category, mescroll) {
-                this.$axios.get('/api/article/list', {
+                this.$axios.get('/api/site/list', {
                     params: {
                         index: (page.num - 1) * 10 + 1,
                         category
@@ -68,7 +68,7 @@
                 })
             },
             changeTab (index) {
-                this.$store.commit('articleTabConfig', {
+                this.$store.commit('siteTabConfig', {
                     currentIndex: index
                 })
 
@@ -78,7 +78,7 @@
                 })
             },
             goTarget (item) {
-                this.$router.push({ path: `/article/${item.id}` })
+                window.location.href = item.url
             }
         },
         beforeDestroy () {

@@ -78,13 +78,14 @@ body{overflow-x:hidden;-webkit-text-size-adjust:none;-webkit-tap-highlight-color
 .border-top-line::before,
 .border-bottom-line::after{left:0;right:0;height:1px;z-index:10;transform:scaleY(.5);}
 .border-top-line::before{top:0;}
-.border-bottom-line::after{bottom:-1px;}
+.border-bottom-line::after{bottom:-0.5px;}
 .border-right-line::after,
 .border-left-line::before{top:0;bottom:0;width:1px;z-index:10;transform:scaleX(.5);}
 .border-right-line::after{right:0;}
 .border-left-line::before{left:0;}
 
 /* mescroll */
+.mescroll{position:relative;box-sizing:border-box;}
 .mescroll-upwarp .bottm-tip{font-size:.24rem;}
 
 /* toast */

@@ -36,9 +36,9 @@ module.exports = async function (ctx) {
     }
 
     if (categoryKey) {
-        sqlString = `SELECT id, title, date, description, category, hot FROM article_data WHERE category='${categoryKey}' ORDER BY id DESC limit ${listIndex}, ${limit}`;
+        sqlString = `SELECT id, title, date, description, category, hot FROM article_data WHERE category='${categoryKey}' ORDER BY id DESC LIMIT ${listIndex}, ${limit}`;
     } else {
-        sqlString = `SELECT id, title, date, description, category, hot FROM article_data ORDER BY id DESC limit ${listIndex}, ${limit}`;
+        sqlString = `SELECT id, title, date, description, category, hot FROM article_data ORDER BY id DESC LIMIT ${listIndex}, ${limit}`;
     }
 
     try {
