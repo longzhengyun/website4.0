@@ -1,5 +1,5 @@
 <template>
-    <section v-if="headerConfig.showHeader" class="model-wrap">
+    <section v-if="headerConfig.showHeader" class="model-wrap border-bottom-line">
         <div v-if="headerConfig.showBack" class="model-icon model-back" @click="goBack"></div>
         <div v-if="headerConfig.showClose" class="model-icon model-close" @click="goClose"></div>
         <h2 class="model-title">{{headerConfig.title}}</h2>
