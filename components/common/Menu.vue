@@ -1,7 +1,7 @@
 <template>
-    <section v-if="menuConfig.showMenu" class="model-wrap border-top-line">
+    <section class="model-wrap border-top-line">
         <ul class="model-list">
-            <li class="model-item" :class="{ 'current': key === menuConfig.currentIndex }" v-for="(item, key) in menuConfig.item" :key="key" @click="changeMenu(key, item.url)">
+            <li class="model-item" :class="{ 'current': key === currentIndex }" v-for="(item, key) in data" :key="key" @click="changeMenu(item.url)">
                 <i :class="`icon ${item.icon}`"></i>
                 <span class="name">{{item.name}}</span>
             </li>
@@ -12,12 +12,9 @@
 <script>
     export default {
         name: 'Menu',
-        props: ['menuConfig'],
+        props: ['data', 'currentIndex'],
         methods: {
-            changeMenu (key, url) {
-                this.$store.commit('menuConfig', {
-                    currentIndex: key
-                })
+            changeMenu (url) {
                 this.$router.push(url)
             }
         }

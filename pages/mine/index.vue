@@ -1,13 +1,19 @@
 <template>
-    <section class="mescroll">
-        <form-component :data="userData" nameLength="3" />
-        <option-component :data="optionData" :goTarget="goTarget" />
+    <section class="app-wrap">
+        <header-component :data="headerConfig" />
+        <section class="mescroll">
+            <form-component :data="userData" nameLength="3" />
+            <option-component :data="optionData" :goTarget="goTarget" />
+        </section>
+        <menu-component :data="menuConfig" :currentIndex="3" />
     </section>
 </template>
 
 <script>
-    import FormComponent from '~/components/common/Form';
-    import OptionComponent from '~/components/common/Option';
+    import HeaderComponent from '~/components/common/Header'
+    import MenuComponent from '~/components/common/Menu'
+    import FormComponent from '~/components/common/Form'
+    import OptionComponent from '~/components/common/Option'
 
     export default {
         async asyncData ({ $axios }) {
@@ -26,6 +32,18 @@
 
             return {
                 userData,
+            }
+        },
+        head () {
+            return {
+                title: this.headerConfig.title,
+            }
+        },
+        data () {
+            return {
+                headerConfig: {
+                    title: '我的'
+                },
                 optionData: [
                     { name: '个人简历', route: '/resume' },
                     { name: '关于佳瑞网', route: '/about' },
@@ -33,17 +51,19 @@
                 ],
             }
         },
-        head () {
-            return {
-                title: '我的'
-            }
+        computed: {
+            menuConfig () {
+                return this.$store.state.menuConfig
+            },
         },
         methods: {
-            goTarget (path) {
-                this.$router.push({ path })
+            goTarget (route) {
+                this.$router.push(route)
             }
         },
         components: {
+            HeaderComponent,
+            MenuComponent,
             FormComponent,
             OptionComponent
         }

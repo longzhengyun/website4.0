@@ -1,27 +1,56 @@
 <template>
-    <div></div>
+    <section class="app-wrap">
+        <header-component :data="headerConfig" />
+        <section class="mescroll">
+            <detail-component :data="detailData" />
+            <recommend-component :data="recommendData" :goTarget="goTarget" />
+        </section>
+    </section>
 </template>
 
 <script>
+    import HeaderComponent from '~/components/common/Header'
+    import RecommendComponent from '~/components/common/Recommend'
+    import DetailComponent from '~/components/article/detail'
+
     export default {
         async asyncData ({ params, $axios }) {
-            let detail = {}
-            let id = params.id
-            let { data } = await $axios.get('/api/article/detail', { params: { id } })
+            let detailData = {}
+            let { data } = await $axios.get('/api/article/detail', { params: { id: params.id } })
 
             if (data.code === 0) {
-                detail = data.data
+                detailData = data.data
             }
 
+            let recommendData = {}
+
             return {
-                detail
+                detailData,
+                recommendData,
             }
         },
         head () {
             return {
-                title: 'article'
+                title: this.detailData.title,
             }
         },
-        components: {}
+        data () {
+            return {
+                headerConfig: {
+                    showBack: true,
+                    title: '文章详情'
+                },
+            }
+        },
+        methods: {
+            goTarget (type, item) {
+                this.$router.push(`/article/${item.id}`)
+            }
+        },
+        components: {
+            HeaderComponent,
+            DetailComponent,
+            RecommendComponent,
+        }
     };
 </script>

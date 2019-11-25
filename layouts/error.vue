@@ -1,5 +1,5 @@
 <template>
-    <section class="container">
+    <section class="mescroll">
         <div class="fail">
             <img src="/img/default_fail.png" class="fail-icon" />
             <span class="fail-text">加载失败，请检查网络是否连接！</span>

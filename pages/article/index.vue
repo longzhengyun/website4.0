@@ -1,25 +1,34 @@
 <template>
-    <mescroll-component :up="mescrollUp" @init="mescrollInit">
-        <tab-component :tabConfig="tabConfig" :changeTab="changeTab" />
-        <list-component v-if="list.length > 0" :data="list" :goTarget="goTarget" />
-        <nothing-component v-else />
-    </mescroll-component>
+    <section class="app-wrap">
+        <header-component :data="headerConfig" />
+        <tab-component :data="tabConfig" :changeTab="changeTab" />
+        <mescroll-component :up="mescrollUp" @init="mescrollInit">
+            <list-component v-if="list.length > 0" :data="list" :goTarget="goTarget" />
+            <nothing-component v-else />
+        </mescroll-component>
+        <menu-component :data="menuConfig" :currentIndex="1" />
+    </section>
 </template>
 
 <script>
+    import HeaderComponent from '~/components/common/Header'
+    import MenuComponent from '~/components/common/Menu'
     import MescrollComponent from 'mescroll.js/mescroll.vue'
-    import TabComponent from '~/components/common/Tab';
-    import ListComponent from '~/components/common/List';
+    import TabComponent from '~/components/common/Tab'
+    import ListComponent from '~/components/common/List'
     import NothingComponent from '~/components/common/Nothing'
 
     export default {
         head () {
             return {
-                title: 'article'
+                title: this.headerConfig.title,
             }
         },
         data () {
             return {
+                headerConfig: {
+                    title: '前端文章'
+                },
                 mescroll: null,
                 mescrollUp: {
                     auto: true,
@@ -30,6 +39,9 @@
             }
         },
         computed: {
+            menuConfig () {
+                return this.$store.state.menuConfig
+            },
             tabConfig () {
                 return this.$store.state.articleTabConfig
             },
@@ -78,7 +90,7 @@
                 })
             },
             goTarget (item) {
-                this.$router.push({ path: `/article/${item.id}` })
+                this.$router.push(`/article/${item.id}`)
             }
         },
         beforeDestroy () {
@@ -88,6 +100,8 @@
             }
         },
         components: {
+            HeaderComponent,
+            MenuComponent,
             MescrollComponent,
             TabComponent,
             ListComponent,
@@ -95,7 +109,3 @@
         }
     };
 </script>
-
-<style scoped>
-    .mescroll{padding-top: 1rem;}
-</style>
