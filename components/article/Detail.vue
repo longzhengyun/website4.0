@@ -1,5 +1,5 @@
 <template>
-    <div class="model-wrap">
+    <div class="model-wrap border-bottom-line">
         <h2 class="model-title">{{data.title}}</h2>
         <div class="model-info">
             <span class="info-item">分类：{{data.category}}</span>
@@ -17,7 +17,7 @@
 </script>
 
 <style scoped>
-    .model-wrap{padding:.4rem;background-color:#fff;}
+    .model-wrap{position:relative;padding:.4rem;background-color:#fff;}
     .model-title{margin-bottom:.2rem;text-align:center;font-size:.36rem;}
     .model-info{display:flex;margin-bottom:.4rem;}
     .model-info .info-item{flex:1;text-align:center;font-size:.24rem;color:#999;}

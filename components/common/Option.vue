@@ -6,7 +6,7 @@
 
 <script>
     export default {
-        name: 'Form',
+        name: 'Option',
         props: ['data', 'goTarget'],
     }
 </script>

@@ -66,7 +66,7 @@
                 }
 
                 if (type === 'site') {
-                    window.location.href = item.url
+                    this.$router.push({ name: 'webView', params: { url: item.url, title: item.title } })
                 }
             }
         },

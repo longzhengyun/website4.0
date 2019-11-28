@@ -1,5 +1,5 @@
 <template>
-    <div class="model-wrap">
+    <div class="model-wrap border-top-line">
         <h2 class="model-title">{{data.name}}</h2>
         <nuxt-link v-if="data.route" class="model-more" :to="data.route">MORE</nuxt-link>
         <div class="model-cont">
