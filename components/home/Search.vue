@@ -5,7 +5,7 @@
         </div>
         <div class="model-cont" @click="goTarget('search')">
             <div class="input">
-                <div class="text">搜索感兴趣的前端文章</div>
+                <div class="text">搜索感兴趣的前端文章和网站</div>
             </div>
             <button class="submit icon-search" title="GO"></button>
         </div>

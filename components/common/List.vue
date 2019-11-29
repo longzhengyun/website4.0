@@ -2,8 +2,8 @@
     <ul class="model-wrap">
         <li class="model-item border-top-line border-bottom-line" v-for="(item, key) in data" :key="key" @click="goTarget(item)">
             <h3 class="item-title ellips">{{item.title}}</h3>
-            <p class="item-text">{{item.description}}</p>
-            <div class="item-more">
+            <p class="item-text" v-if="item.description">{{item.description}}</p>
+            <div class="item-more" v-if="item.category">
                 <span class="item-more-text" v-if="item.date">{{item.date}}</span>
                 <span class="item-more-text">{{item.category}}</span>
                 <span class="item-more-text item-more-hot" v-if="item.hot === 'y'">HOT</span>

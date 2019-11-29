@@ -37,6 +37,9 @@
                 recommendData,
             }
         },
+        validate({ params }) {
+            return Number.isSafeInteger(Number(params.id)) && Number(params.id) >= 0
+        },
         head () {
             return {
                 title: this.detailData.title,

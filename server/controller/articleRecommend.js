@@ -20,7 +20,7 @@ module.exports = async function (ctx) {
             result.msg = '查无数据';
         }
     } catch (error) {
-        if (!Number.isSafeInteger(id) || id < 0) {
+        if (!Number.isSafeInteger(Number(id)) || Number(id) < 0) {
             result.msg = '参数出错: id';
         } else {
             result.msg = error;

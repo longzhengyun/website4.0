@@ -22,10 +22,10 @@
                 type: 'article',
                 item: [],
             }
-            let articleList = await $axios.get('/api/article/hot')
+            let articleList = (await $axios.get('/api/article/hot')).data
 
-            if (articleList.data.code === 0) {
-                articleData.item = articleList.data.data
+            if (articleList.code === 0) {
+                articleData.item = articleList.data
             }
 
             let siteData = {
@@ -34,10 +34,10 @@
                 type: 'site',
                 item: [],
             }
-            let sitelist = await $axios.get('/api/site/hot')
+            let sitelist = (await $axios.get('/api/site/hot')).data
 
-            if (sitelist.data.code === 0) {
-                siteData.item = sitelist.data.data
+            if (sitelist.code === 0) {
+                siteData.item = sitelist.data
             }
 
             return {
@@ -66,7 +66,7 @@
                 }
 
                 if (type === 'site') {
-                    this.$router.push({ name: 'webView', params: { url: item.url, title: item.title } })
+                    this.$router.push({ path: `/webView?url=${item.url}&title=${item.title}` })
                 }
             }
         },

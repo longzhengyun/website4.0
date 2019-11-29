@@ -10,10 +10,13 @@
     import WebViewComponent from '~/components/common/WebView'
 
     export default {
-        async asyncData ({ params }) {
+        async asyncData ({ query }) {
             return {
-                webView: params,
+                webView: query,
             }
+        },
+        validate({ query }) {
+            return query.url && query.url.indexOf('http') === 0
         },
         head () {
             return {

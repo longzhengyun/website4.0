@@ -48,6 +48,7 @@
                     { name: '个人简历', route: '/resume' },
                     { name: '关于佳瑞网', route: '/about' },
                     { name: '佳瑞网APP', route: '/myapp' },
+                    // { name: '设置', route: '/set' },
                 ],
             }
         },

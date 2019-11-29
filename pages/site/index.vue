@@ -11,9 +11,10 @@
 </template>
 
 <script>
+    import MescrollComponent from 'mescroll.js/mescroll.vue'
+
     import HeaderComponent from '~/components/common/Header'
     import MenuComponent from '~/components/common/Menu'
-    import MescrollComponent from 'mescroll.js/mescroll.vue'
     import TabComponent from '~/components/common/Tab'
     import ListComponent from '~/components/common/List'
     import NothingComponent from '~/components/common/Nothing'
@@ -90,7 +91,7 @@
                 })
             },
             goTarget (item) {
-                this.$router.push({ name: 'webView', params: { url: item.url, title: item.title } })
+                this.$router.push({ path: `/webView?url=${item.url}&title=${item.title}` })
             }
         },
         beforeDestroy () {
@@ -100,9 +101,9 @@
             }
         },
         components: {
+            MescrollComponent,
             HeaderComponent,
             MenuComponent,
-            MescrollComponent,
             TabComponent,
             ListComponent,
             NothingComponent

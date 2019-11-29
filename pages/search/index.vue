@@ -1,12 +1,10 @@
 <template>
     <section class="app-wrap">
         <header-component :data="headerConfig" />
-        <tab-component :data="tabConfig" :changeTab="changeTab" />
-        <mescroll-component :up="mescrollUp" @init="mescrollInit">
-            <list-component v-if="list.length > 0" :data="list" :goTarget="goTarget" />
-            <nothing-component v-else />
+        <input-component :doAction="doSearch" />
+        <mescroll-component :up="mescrollUp" :down="mescrollDown" @init="mescrollInit">
+            <list-component :data="list" :goTarget="goTarget" />
         </mescroll-component>
-        <menu-component :data="menuConfig" :currentIndex="1" />
     </section>
 </template>
 
@@ -14,10 +12,8 @@
     import MescrollComponent from 'mescroll.js/mescroll.vue'
 
     import HeaderComponent from '~/components/common/Header'
-    import MenuComponent from '~/components/common/Menu'
-    import TabComponent from '~/components/common/Tab'
     import ListComponent from '~/components/common/List'
-    import NothingComponent from '~/components/common/Nothing'
+    import InputComponent from '~/components/search/Input'
 
     export default {
         head () {
@@ -28,24 +24,22 @@
         data () {
             return {
                 headerConfig: {
-                    title: '前端文章'
+                    showBack: true,
+                    title: '全站搜索'
                 },
                 mescroll: null,
                 mescrollUp: {
-                    auto: true,
+                    use: false,
                     callback: this.upCallback,
                     htmlNodata: '<p class="upwarp-nodata">没有更多数据了!</p>'
                 },
+                mescrollDown: {
+                    use: false,
+                },
+                type: 'article',
+                keyword: '',
                 list: []
             }
-        },
-        computed: {
-            menuConfig () {
-                return this.$store.state.menuConfig
-            },
-            tabConfig () {
-                return this.$store.state.articleTabConfig
-            },
         },
         methods: {
             mescrollInit (mescroll) {
@@ -53,13 +47,14 @@
                 this.mescroll = mescroll
             },
             upCallback (page, mescroll) {
-                this.getData(page, this.tabConfig.currentIndex, mescroll)
+                this.getData(page, this.type, this.keyword, mescroll)
             },
-            getData (page, category, mescroll) {
-                this.$axios.get('/api/article/list', {
+            getData (page, type, keyword, mescroll) {
+                this.$axios.get('/api/search', {
                     params: {
                         index: (page.num - 1) * 10 + 1,
-                        category
+                        type,
+                        keyword,
                     }
                 }).then((res) => {
                     let { code, data } = res.data
@@ -80,18 +75,23 @@
                     mescroll.endErr(error)
                 })
             },
-            changeTab (index) {
-                this.$store.commit('articleTabConfig', {
-                    currentIndex: index
-                })
+            doSearch(data) {
+                if (data && data.keyword) {
+                    this.keyword = data.keyword
+                    this.type = data.type
 
-                this.$nextTick(() => {
-                    this.mescroll.triggerDownScroll()
+                    // this.mescroll.triggerUpScroll()
                     this.mescroll.scrollTo(0, 0)
-                })
+                }
             },
             goTarget (item) {
-                this.$router.push(`/article/${item.id}`)
+                if (this.type === 'article') {
+                    this.$router.push(`/article/${item.id}`)
+                }
+
+                if (this.type === 'site') {
+                    this.$router.push({ path: `/webView?url=${item.url}&title=${item.title}` })
+                }
             }
         },
         beforeDestroy () {
@@ -103,10 +103,8 @@
         components: {
             MescrollComponent,
             HeaderComponent,
-            MenuComponent,
-            TabComponent,
             ListComponent,
-            NothingComponent
+            InputComponent,
         }
     };
 </script>
