@@ -4,7 +4,7 @@
         <nuxt-link v-if="data.route" class="model-more" :to="data.route">MORE</nuxt-link>
         <div class="model-cont">
             <ul class="model-list">
-                <li class="model-item ellips" :class="{ 'left border-right-line' : key%2 === 0, 'right' : key%2 === 1 }" v-for="(item, key) in data.item" :key="key" @click="goTarget(data.type, item)">{{item.title}}</li>
+                <li class="model-item ellips" :class="{ 'left border-right-line' : key%2 === 0, 'right' : key%2 === 1 }" v-for="(item, key) in data.item" :key="key" @click="doAction(data.type, item)">{{item.title}}</li>
             </ul>
         </div>
     </div>
@@ -13,7 +13,7 @@
 <script>
     export default {
         name: 'Recommend',
-        props: ['data', 'goTarget'],
+        props: ['data', 'doAction'],
     }
 </script>
 

@@ -3,7 +3,7 @@
         <header-component :data="headerConfig" />
         <tab-component :data="tabConfig" :changeTab="changeTab" />
         <mescroll-component :up="mescrollUp" @init="mescrollInit">
-            <list-component v-if="list.length > 0" :data="list" :goTarget="goTarget" />
+            <list-component v-if="list.length > 0" :data="list" :doAction="goTarget" />
             <nothing-component v-else />
         </mescroll-component>
         <menu-component :data="menuConfig" :currentIndex="2" />

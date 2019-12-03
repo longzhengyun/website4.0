@@ -16,17 +16,16 @@ module.exports = async function (ctx) {
         listIndex = Number(index) - 1;
     }
 
-    let sqlString = '';
-
+    let table = '';
     if (type === 'article') {
-        sqlString = `SELECT id, title FROM article_data WHERE title LIKE '%${keyword}%' ORDER BY id DESC LIMIT ${listIndex}, ${limit}`;
+        table = 'article_data';
     }
     if (type === 'site') {
-        sqlString = `SELECT id, title FROM site_data WHERE title LIKE '%${keyword}%' ORDER BY id DESC LIMIT ${listIndex}, ${limit}`;
+        table = 'site_data';
     }
 
     try {
-        let data = await mysql.query(sqlString);
+        let data = await mysql.query(`SELECT id, title FROM ${table} WHERE title LIKE '%${keyword}%' ORDER BY id DESC LIMIT ${listIndex}, ${limit}`);
         if (Array.isArray(data) && data.length > 0) {
             result.code = 0;
             result.msg = '成功';

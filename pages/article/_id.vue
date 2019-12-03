@@ -3,7 +3,7 @@
         <header-component :data="headerConfig" />
         <section class="mescroll">
             <detail-component :data="detailData" />
-            <recommend-component :data="recommendData" :goTarget="goTarget" />
+            <recommend-component :data="recommendData" :doAction="goTarget" />
         </section>
     </section>
 </template>

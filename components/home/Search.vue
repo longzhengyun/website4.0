@@ -3,7 +3,7 @@
         <div class="model-logo">
             <img class="img" src="~/assets/logo.png" />
         </div>
-        <div class="model-cont" @click="goTarget('search')">
+        <div class="model-cont" @click="doAction('search')">
             <div class="input">
                 <div class="text">搜索感兴趣的前端文章和网站</div>
             </div>
@@ -15,7 +15,7 @@
 <script>
     export default {
         name: 'Search',
-        props: ['goTarget'],
+        props: ['doAction'],
     }
 </script>
 

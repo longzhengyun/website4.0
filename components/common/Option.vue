@@ -1,13 +1,13 @@
 <template>
     <ul class="model-wrap border-bottom-line">
-        <li class="model-item" :class="{ 'border-bottom-line': key !== data.length - 1 }" v-for="(item, key) in data" :key="key" @click="item.route && goTarget(item.route)">{{item.name}}<span v-if="item.route" class="model-arrow"></span></li>
+        <li class="model-item" :class="{ 'border-bottom-line': key !== data.length - 1 }" v-for="(item, key) in data" :key="key" @click="item.route && doAction(item.route)">{{item.name}}<span v-if="item.route" class="model-arrow"></span></li>
     </ul>
 </template>
 
 <script>
     export default {
         name: 'Option',
-        props: ['data', 'goTarget'],
+        props: ['data', 'doAction'],
     }
 </script>
 

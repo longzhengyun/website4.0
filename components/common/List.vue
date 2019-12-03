@@ -1,6 +1,6 @@
 <template>
     <ul class="model-wrap">
-        <li class="model-item border-top-line border-bottom-line" v-for="(item, key) in data" :key="key" @click="goTarget(item)">
+        <li class="model-item border-top-line border-bottom-line" v-for="(item, key) in data" :key="key" @click="doAction(item)">
             <h3 class="item-title ellips">{{item.title}}</h3>
             <p class="item-text" v-if="item.description">{{item.description}}</p>
             <div class="item-more" v-if="item.category">
@@ -15,7 +15,7 @@
 <script>
     export default {
         name: 'List',
-        props: ['data', 'goTarget'],
+        props: ['data', 'doAction'],
     }
 </script>
 

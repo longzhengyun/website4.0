@@ -1,6 +1,6 @@
 <template>
     <ul class="model-wrap border-bottom-line">
-        <li class="model-item" :class="{ 'border-bottom-line': key !== data.length - 1 }" v-for="(item, key) in data" :key="key" @click="item.route && goTarget(item.route)">
+        <li class="model-item" :class="{ 'border-bottom-line': key !== data.length - 1 }" v-for="(item, key) in data" :key="key" @click="item.route && doAction(item.route)">
             <div class="item-name" :style="`width:${nameLength}em`">{{item.name}}</div>
             <div class="item-value">{{item.value}}</div>
             <span v-if="item.route" class="item-arrow"></span>
@@ -11,7 +11,7 @@
 <script>
     export default {
         name: 'Form',
-        props: ['data', 'nameLength', 'goTarget'],
+        props: ['data', 'nameLength', 'doAction'],
     }
 </script>
 

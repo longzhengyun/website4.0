@@ -10,10 +10,14 @@
 <script>
     export default {
         name: 'Header',
-        props: ['data', 'goTarget'],
+        props: ['data', 'doAction'],
         methods: {
             goBack () {
-                this.$router.go(-1)
+                if (window.history.length > 1) {
+                    this.$router.go(-1)
+                } else {
+                    this.$router.push('/')
+                }
             },
             goHome () {
                 this.$router.push('/')

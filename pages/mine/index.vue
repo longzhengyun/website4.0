@@ -3,7 +3,7 @@
         <header-component :data="headerConfig" />
         <section class="mescroll">
             <form-component :data="userData" nameLength="3" />
-            <option-component :data="optionData" :goTarget="goTarget" />
+            <option-component :data="optionData" :doAction="goTarget" />
         </section>
         <menu-component :data="menuConfig" :currentIndex="3" />
     </section>

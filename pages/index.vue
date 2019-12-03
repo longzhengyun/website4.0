@@ -1,9 +1,9 @@
 <template>
     <section class="app-wrap">
         <section class="mescroll">
-            <search-component :goTarget="goTarget" />
-            <recommend-component :data="articleData" :goTarget="goTarget" />
-            <recommend-component :data="siteData" :goTarget="goTarget" />
+            <search-component :doAction="goTarget" />
+            <recommend-component :data="articleData" :doAction="goTarget" />
+            <recommend-component :data="siteData" :doAction="goTarget" />
         </section>
         <menu-component :data="menuConfig" :currentIndex="0" />
     </section>
