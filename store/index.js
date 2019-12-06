@@ -1,4 +1,15 @@
+const getCookie = (name, cookie) => {
+    let arr = [];
+    let reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)');
+    if (cookie && (arr = cookie.match(reg))) {
+        return unescape(arr[2]);
+    } else {
+        return null;
+    }
+}
+
 export const state = () => ({
+    isLogin: false,
     menuConfig: [
         {
             name: '首页',
@@ -70,6 +81,9 @@ export const state = () => ({
 })
 
 export const mutations = {
+    isLogin(state, data) {
+        state.isLogin = data
+    },
     articleTabConfig(state, data) {
         Object.assign(state.articleTabConfig, data)
     },
@@ -78,4 +92,11 @@ export const mutations = {
     },
 }
 
-export const actions = {}
+export const actions = {
+    nuxtServerInit({ commit }, { req }) {
+        const token = getCookie('token', req.headers.cookie)
+        if (token) {
+            commit('isLogin', true)
+        }
+    },
+}

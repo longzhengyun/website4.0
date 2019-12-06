@@ -89,5 +89,5 @@ sw.*
 # Vim swap files
 *.swp
 
-dbConfig.js
+server/config
 static/content

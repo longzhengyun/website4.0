@@ -3,6 +3,7 @@ const koaBody = require('koa-body');
 const consola = require('consola');
 const { Nuxt, Builder } = require('nuxt');
 const router = require('./api');
+const check = require('./middleware/authCheck');
 
 const app = new Koa();
 
@@ -10,6 +11,7 @@ app.use(koaBody({
     jsonLimit: '1024kb'
 }));
 
+app.use(check);
 app.use(router.routes());
 
 // Import and Set Nuxt.js options

@@ -1,5 +1,4 @@
 const mysql = require('./../mysql');
-const { FormatDate } = require('./../../assets/utils');
 
 module.exports = async function (ctx) {
     const { query } = ctx.request;

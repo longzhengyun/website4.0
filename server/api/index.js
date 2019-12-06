@@ -1,13 +1,13 @@
-const Router = require('koa-router')
+const Router = require('koa-router');
 const router = new Router({
     prefix: '/api'
 });
 
-const auth = require('./auth')
-const article = require('./article')
-const site = require('./site')
-const search = require('./search')
-const user = require('./user')
+const auth = require('./auth');
+const article = require('./article');
+const site = require('./site');
+const search = require('./search');
+const user = require('./user');
 
 router.use(auth.routes());
 router.use(article.routes());

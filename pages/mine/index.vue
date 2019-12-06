@@ -18,15 +18,15 @@
     export default {
         async asyncData ({ $axios }) {
             let userData = []
-            let { data } = await $axios.get('/api/user/base')
+            let { code, data } = (await $axios.get('/api/user/base')).data
 
-            if (data.code === 0) {
+            if (code === 0) {
                 userData = [
-                    { name: '英文名', value: data.data.nickname },
-                    { name: 'Email', value: data.data.email },
-                    { name: '城市', value: data.data.city },
-                    { name: '职业', value: data.data.job },
-                    { name: '签名', value: data.data.motto },
+                    { name: '英文名', value: data.nickname },
+                    { name: 'Email', value: data.email },
+                    { name: '城市', value: data.city },
+                    { name: '职业', value: data.job },
+                    { name: '签名', value: data.motto },
                 ];
             }
 
@@ -46,9 +46,8 @@
                 },
                 optionData: [
                     { name: '个人简历', route: '/resume' },
-                    { name: '关于佳瑞网', route: '/about' },
-                    { name: '佳瑞网APP', route: '/myapp' },
-                    // { name: '设置', route: '/set' },
+                    { name: '关于佳瑞网', route: '/mine/about' },
+                    { name: '佳瑞网APP', route: '/mine/myapp' },
                 ],
             }
         },

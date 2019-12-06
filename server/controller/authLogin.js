@@ -1,8 +1,11 @@
 const mysql = require('./../mysql')
 const jwt = require('jsonwebtoken')
 
+const { secret } = require('./../config');
+
 module.exports = async function (ctx) {
     const { body } = ctx.request;
+    const { username = '', password = '' } = body;
 
     let result = {
         code: -1,
@@ -11,32 +14,33 @@ module.exports = async function (ctx) {
     }
 
     try {
-        let data = await mysql.query(`SELECT * FROM admin_data WHERE username='${body.username}'`);
+        let data = await mysql.query(`SELECT * FROM admin_data WHERE username='${username}'`);
         if (Array.isArray(data) && data.length > 0) {
-            if (data[0].password === body.password) {
+            let res = data[0];
+            if (res.password === password) {
                 let token = jwt.sign({
-                    username: data[0].username,
-                    time: new Date().getTime(),
-                    timeout: 1000 * 60 * 60,
-                }, 'secret');
+                    userid: res.id, // 账户id
+                    username: res.username, // 账户名
+                    level: res.level, // 账户等级
+                }, secret, { expiresIn: 60 * 60 });
 
                 ctx.cookies.set('token', token, {
                     maxAge: 1000 * 60 * 60
                 })
 
                 result.code = 0;
-                result.msg = '成功';
-                result.data = { token };
+                result.msg = '登录成功';
+                result.data = { token, userid: res.id, username: res.username, level: res.level };
             } else {
                 result.msg = '密码不正确!';
             }
         } else {
-            result.msg = '查无数据';
+            result.msg = '查无此账号';
         }
     } catch (error) {
-        if (!body.username) {
+        if (!username) {
             result.msg = '参数出错: username';
-        } else if (!body.password) {
+        } else if (!password) {
             result.msg = '参数出错: password';
         } else {
             result.msg = error;
