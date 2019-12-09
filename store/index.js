@@ -1,13 +1,3 @@
-const getCookie = (name, cookie) => {
-    let arr = [];
-    let reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)');
-    if (cookie && (arr = cookie.match(reg))) {
-        return unescape(arr[2]);
-    } else {
-        return null;
-    }
-}
-
 export const state = () => ({
     isLogin: false,
     menuConfig: [
@@ -94,7 +84,7 @@ export const mutations = {
 
 export const actions = {
     nuxtServerInit({ commit }, { req }) {
-        const token = getCookie('token', req.headers.cookie)
+        const token = this.$GetCookie('token', req.headers.cookie)
         if (token) {
             commit('isLogin', true)
         }

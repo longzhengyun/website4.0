@@ -43,7 +43,7 @@
             },
             'password': function (val) {
                 this.isPass = this.isVerification()
-            }
+            },
         },
         methods: {
             isVerification() {
@@ -59,11 +59,13 @@
                     password: this.password
                 }).then((res) => {
                     let { code, msg, data } = res.data
-                    this.$toast.show(msg)
-                    this.$store.commit('isLogin', true)
+                    if (code === 0) {
+                        this.$toast.show(msg)
+                        this.$store.commit('isLogin', true)
 
-                    let path = this.$route.query.redirect || '/'
-                    this.$router.replace(path)
+                        let path = this.$route.query.redirect || '/'
+                        this.$router.replace(path)
+                    }
                 }).catch((error) => {
                     console.log(error);
                 })

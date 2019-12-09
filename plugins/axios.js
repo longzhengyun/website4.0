@@ -1,6 +1,19 @@
-export default function ({ $axios, redirect }) {
-    $axios.onRequest(config => {
-        console.log('Making request to ' + config.url)
+export default function ({ $axios, redirect, route, store }) {
+    // $axios.onRequest(config => {
+    //     console.log('Making request to ' + config.url)
+    // })
+
+    $axios.onResponse(response => {
+        const { code } = response.data
+        if (code === -2) {
+            if (store.state.isLogin) {
+                store.commit('isLogin', false)
+            }
+            redirect({
+                path: '/login',
+                query: { redirect: route.fullPath }
+            })
+        }
     })
 
     $axios.onError(error => {

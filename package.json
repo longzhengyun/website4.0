@@ -12,7 +12,6 @@
         "test": "jest"
     },
     "dependencies": {
-        "@nuxtjs/auth": "^4.8.4",
         "@nuxtjs/axios": "^5.3.6",
         "@nuxtjs/pwa": "^3.0.0-0",
         "@nuxtjs/toast": "^3.2.1",

@@ -3,16 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const verify = Promise.promisify(jwt.verify);
 const { secret } = require('./../config');
-
-function getCookie (name, cookie) {
-    let arr = [];
-    let reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)');
-    if (cookie && (arr = cookie.match(reg))) {
-        return unescape(arr[2]);
-    } else {
-        return null;
-    }
-}
+const { GetCookie } = require('./../middleware/utils');
 
 module.exports = async function (ctx, next) {
     let url = ctx.request.url;
@@ -20,19 +11,24 @@ module.exports = async function (ctx, next) {
 
     if (url !== '/api/auth/login' && method === 'POST') {
         let result = {
-            code: -1,
+            code: -2, // -1: 普通错误 -2: token失效
             msg: '',
             data: null
         }
 
-        let token = getCookie('token', ctx.request.header.cookie);
+        let token = GetCookie('token', ctx.request.header.cookie);
 
         try {
             // 解码
             await verify(token, secret);
             await next();
         } catch (err) {
-            result.msg = 'token 已过期!';
+            result.msg = 'token 已失效!';
+
+            // 清除浏览器失效token
+            ctx.cookies.set('token', '', {
+                maxAge: 0
+            })
             ctx.body = result;
         }
     } else {

@@ -2,7 +2,7 @@
     <section class="app-wrap">
         <header-component :data="headerConfig" />
         <section class="mescroll">
-            <form-component :data="baseData" nameLength="4" />
+            <form-component :data="baseData" nameLength="4" :doAction="goTarget" />
             <form-component :data="detailData" nameLength="4" />
             <option-component :data="optionData" :doAction="goTarget" />
         </section>
@@ -15,28 +15,32 @@
     import OptionComponent from '~/components/common/Option'
 
     export default {
-        middleware: 'auth',
         async asyncData ({ $axios }) {
             let baseData = []
             let detailData = []
             let { code, data } = (await $axios.post('/api/user/detail')).data
 
+            // 获取年龄，工作年限
+            const FormatYear = (date) => {
+                return parseInt((new Date().getTime() - new Date(date).getTime()) / 1000 / 60 / 60 / 24 / 365)
+            }
+
             if (code === 0) {
                 baseData = [
                     { name: '姓名', value: data.nickname },
-                    { name: '年龄', value: data.email },
-                    { name: '手机', value: data.city },
-                    { name: 'Email', value: data.job },
-                    { name: 'GitHub', value: data.motto, route: '/' },
+                    { name: '年龄', value: FormatYear(data.birthday) },
+                    { name: '手机', value: data.phone },
+                    { name: 'Email', value: data.email },
+                    { name: 'GitHub', route: data.github },
                 ];
 
                 detailData = [
-                    { name: '学历', value: data.nickname },
-                    { name: '专业', value: data.email },
+                    { name: '学历', value: data.degrees },
+                    { name: '专业', value: data.major },
                     { name: '职业', value: data.job },
-                    { name: '工作年限', value: data.job },
-                    { name: '工作状态', value: data.motto },
-                    { name: '期望年薪', value: data.motto },
+                    { name: '工作年限', value: FormatYear(data.worklife) },
+                    { name: '工作状态', value: data.state },
+                    { name: '期望年薪', value: data.salary },
                 ];
             }
 
@@ -67,7 +71,11 @@
         },
         methods: {
             goTarget (route) {
-                this.$router.push(route)
+                if (route.indexOf('http') === 0) {
+                    window.location.href = route
+                } else {
+                    this.$router.push(route)
+                }
             }
         },
         components: {

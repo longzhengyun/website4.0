@@ -17,7 +17,7 @@
                 { name: '平台', value: 'Android' },
                 { name: '版本', value: 'V1.2' },
                 { name: '应用说明', value: '采用React Native开发' },
-                { name: '下载地址', value: '点击下载佳瑞网App', route: 'Download' },
+                { name: '下载地址', route: 'Download' },
             ];
 
             return {

@@ -43,7 +43,8 @@ module.exports = {
     ** Plugins to load before mounting the App
     */
     plugins: [
-        // { src: '~plugins/axios.js' },
+        { src: '~plugins/axios.js' },
+        { src: '~plugins/utils.js' },
     ],
     /*
     ** Nuxt.js dev-modules
@@ -55,7 +56,6 @@ module.exports = {
     */
     modules: [
         // Doc: https://axios.nuxtjs.org/usage
-        // '@nuxtjs/auth',
         '@nuxtjs/axios',
         '@nuxtjs/pwa',
         '@nuxtjs/toast',
@@ -68,20 +68,6 @@ module.exports = {
         proxy: true, // 代理
         retry: true // 重试
     },
-    // auth: {
-    //     redirect: {
-    //         callback: '/callback'
-    //     },
-    //     strategies: {
-    //         local: {
-    //             endpoints: {
-    //                 login: { url: '/api/auth/login', method: 'post', propertyName: 'token' },
-    //                 logout: { url: '/api/auth/logout', method: 'post' },
-    //                 user: { url: '/api/auth/user', method: 'get', propertyName: 'user' }
-    //             }
-    //         }
-    //     }
-    // },
     /*
     ** Build configuration
     */

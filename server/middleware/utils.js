@@ -26,4 +26,15 @@ const FormatDate = (date, fmt) => {
     return fmt
 };
 
-module.exports = { FormatDate }
+// 获取cookies中的token
+const GetCookie = (name, cookie) => {
+    let arr = [];
+    let reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)');
+    if (cookie && (arr = cookie.match(reg))) {
+        return unescape(arr[2]);
+    } else {
+        return null;
+    }
+}
+
+module.exports = { FormatDate, GetCookie }

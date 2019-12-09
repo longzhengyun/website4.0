@@ -16,7 +16,7 @@
     import OptionComponent from '~/components/common/Option'
 
     export default {
-        async asyncData ({ $axios }) {
+        async asyncData ({ $axios, store }) {
             let userData = []
             let { code, data } = (await $axios.get('/api/user/base')).data
 
@@ -30,8 +30,22 @@
                 ];
             }
 
+            let optionData = [
+                { name: '个人简历', route: '/resume' },
+                { name: '关于佳瑞网', route: '/mine/about' },
+                { name: '佳瑞网APP', route: '/mine/myapp' },
+            ]
+
+            if (store.state.isLogin) {
+                optionData.push({
+                    name: '设置',
+                    route: '/mine/set'
+                })
+            }
+
             return {
                 userData,
+                optionData,
             }
         },
         head () {
@@ -44,11 +58,6 @@
                 headerConfig: {
                     title: '我的'
                 },
-                optionData: [
-                    { name: '个人简历', route: '/resume' },
-                    { name: '关于佳瑞网', route: '/mine/about' },
-                    { name: '佳瑞网APP', route: '/mine/myapp' },
-                ],
             }
         },
         computed: {

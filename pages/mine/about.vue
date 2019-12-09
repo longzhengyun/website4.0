@@ -18,12 +18,12 @@
         async asyncData () {
             let baseData = [
                 { name: '版本', value: `V ${version}`, route: '/mine/version' },
-                { name: '应用技术', value: 'HTML5、CSS3、VUE、NODE、MYSQL等' },
+                { name: '应用技术', value: 'HTML5、CSS3、VUE、NODE、MYSQL等', multi: true },
             ];
 
             let moreData = [
-                { name: '版权声明', value: '网站版权归佳瑞网所有，文章归原作者所有。' },
-                { name: '网站说明', value: '佳瑞网属于个人博客类网站，为记录及分享前端开发相关文章而建。' },
+                { name: '版权声明', value: '网站版权归佳瑞网所有，文章归原作者所有。', multi: true },
+                { name: '网站说明', value: '佳瑞网属于个人博客类网站，为记录及分享前端开发相关文章而建。', multi: true },
             ];
 
             return {
