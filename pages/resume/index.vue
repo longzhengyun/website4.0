@@ -2,6 +2,9 @@
     <section class="app-wrap">
         <header-component :data="headerConfig" />
         <section class="mescroll">
+            <div class="my-photo">
+                <img class="img" src="~/assets/jary.jpg" />
+            </div>
             <form-component :data="baseData" nameLength="4" :doAction="goTarget" />
             <form-component :data="detailData" nameLength="4" />
             <option-component :data="optionData" :doAction="goTarget" />
@@ -61,7 +64,7 @@
                     title: 'Resume'
                 },
                 optionData: [
-                    { name: '个人案例', route: '/case' },
+                    { name: '个人案例', route: '/example' },
                     { name: '职业评价', route: '/resume/evaluation' },
                     { name: '职业技能', route: '/resume/skill' },
                     { name: '工作经历', route: '/resume/experience' },
@@ -85,3 +88,7 @@
         }
     };
 </script>
+
+<style scoped>
+    .my-photo{width:2.4rem;height:2.4rem;border-radius:100%;margin:.2rem auto;overflow:hidden;}
+</style>

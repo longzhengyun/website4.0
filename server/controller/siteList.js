@@ -16,7 +16,6 @@ module.exports = async function (ctx) {
     }
 
     let categoryKey = '';
-    let sqlString = '';
     switch (category) {
         case '1':
             categoryKey = '技术';
@@ -31,14 +30,13 @@ module.exports = async function (ctx) {
             categoryKey = '';
     }
 
+    let sqlString = '';
     if (categoryKey) {
-        sqlString = `SELECT * FROM site_data WHERE category='${categoryKey}' ORDER BY id DESC LIMIT ${listIndex}, ${limit}`;
-    } else {
-        sqlString = `SELECT * FROM site_data ORDER BY id DESC LIMIT ${listIndex}, ${limit}`;
+        sqlString = `WHERE category='${categoryKey}'`;
     }
 
     try {
-        let data = await mysql.query(sqlString);
+        let data = await mysql.query(`SELECT * FROM site_data ${sqlString} ORDER BY id DESC LIMIT ${listIndex}, ${limit}`);
         if (Array.isArray(data) && data.length > 0) {
             result.code = 0;
             result.msg = '成功';

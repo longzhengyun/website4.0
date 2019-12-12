@@ -2,8 +2,8 @@ const mysql = require('./../mysql');
 const { FormatDate } = require('./../middleware/utils');
 
 module.exports = async function (ctx) {
-    const { query } = ctx.request;
-    const { index = '1', limit = '10', category = '0' } = query;
+    const { body } = ctx.request;
+    const { index = 1, limit = 10, category = 0 } = body;
 
     let result = {
         code: -1,
@@ -18,17 +18,11 @@ module.exports = async function (ctx) {
 
     let categoryKey = '';
     switch (category) {
-        case '1':
-            categoryKey = 'HTML';
+        case 1:
+            categoryKey = 'Mobile';
             break;
-        case '2':
-            categoryKey = 'CSS';
-            break;
-        case '3':
-            categoryKey = 'JavaScript';
-            break;
-        case '4':
-            categoryKey = '杂谈';
+        case 2:
+            categoryKey = 'PC';
             break;
         default:
             categoryKey = '';
@@ -40,10 +34,10 @@ module.exports = async function (ctx) {
     }
 
     try {
-        let data = await mysql.query(`SELECT id, title, date, description, category, hot FROM article_data ${sqlString} ORDER BY id DESC LIMIT ${listIndex}, ${limit}`);
+        let data = await mysql.query(`SELECT id, title, date, description, belong, category, hot FROM case_data ${sqlString} ORDER BY id DESC LIMIT ${listIndex}, ${limit}`);
         if (Array.isArray(data) && data.length > 0) {
             data.map(item => {
-                item.date = FormatDate(new Date(item.date * 1000), 'yyyy-MM-dd');
+                item.date = FormatDate(new Date(item.date), 'yyyy-MM-dd');
             });
 
             result.code = 0;

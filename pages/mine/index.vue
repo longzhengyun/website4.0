@@ -31,16 +31,19 @@
             }
 
             let optionData = [
-                { name: '个人简历', route: '/resume' },
                 { name: '关于佳瑞网', route: '/mine/about' },
                 { name: '佳瑞网APP', route: '/mine/myapp' },
             ]
 
             if (store.state.isLogin) {
-                optionData.push({
-                    name: '设置',
-                    route: '/mine/set'
-                })
+                optionData = optionData.concat([
+                    { name: '个人简历', route: '/resume' },
+                    { name: '设置', route: '/mine/set' },
+                ])
+            } else {
+                optionData = optionData.concat([
+                    { name: '登录', route: '/login' },
+                ])
             }
 
             return {

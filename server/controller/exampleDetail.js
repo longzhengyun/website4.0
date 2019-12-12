@@ -2,8 +2,8 @@ const mysql = require('./../mysql')
 const { FormatDate } = require('./../middleware/utils');
 
 module.exports = async function (ctx) {
-    const { query } = ctx.request;
-    const { id = 0 } = query;
+    const { body } = ctx.request;
+    const { id = 0 } = body;
 
     let result = {
         code: -1,
@@ -12,9 +12,9 @@ module.exports = async function (ctx) {
     }
 
     try {
-        let data = await mysql.query(`SELECT * FROM article_data WHERE id=${id}`);
+        let data = await mysql.query(`SELECT * FROM case_data WHERE id='${id}'`);
         if (Array.isArray(data) && data.length > 0) {
-            data[0].date = FormatDate(new Date(data[0].date * 1000), 'yyyy-MM-dd');
+            data[0].date = FormatDate(new Date(data[0].date), 'yyyy-MM-dd');
 
             result.code = 0;
             result.msg = '成功';
@@ -23,11 +23,7 @@ module.exports = async function (ctx) {
             result.msg = '查无数据';
         }
     } catch (error) {
-        if (!Number.isSafeInteger(Number(id)) || Number(id) < 0) {
-            result.msg = '参数出错: id';
-        } else {
-            result.msg = error;
-        }
+        result.msg = error;
     }
 
     ctx.body = result

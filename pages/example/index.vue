@@ -6,7 +6,6 @@
             <list-component v-if="list.length > 0" :data="list" :doAction="goTarget" />
             <nothing-component v-else />
         </mescroll-component>
-        <menu-component :data="menuConfig" :currentIndex="2" />
     </section>
 </template>
 
@@ -14,7 +13,6 @@
     import MescrollComponent from 'mescroll.js/mescroll.vue'
 
     import HeaderComponent from '~/components/common/Header'
-    import MenuComponent from '~/components/common/Menu'
     import TabComponent from '~/components/common/Tab'
     import ListComponent from '~/components/common/List'
     import NothingComponent from '~/components/common/Nothing'
@@ -28,7 +26,8 @@
         data () {
             return {
                 headerConfig: {
-                    title: '网站收藏'
+                    showBack: true,
+                    title: '个人案例'
                 },
                 mescroll: null,
                 mescrollUp: {
@@ -40,11 +39,8 @@
             }
         },
         computed: {
-            menuConfig () {
-                return this.$store.state.menuConfig
-            },
             tabConfig () {
-                return this.$store.state.siteTabConfig
+                return this.$store.state.exampleTabConfig
             },
         },
         methods: {
@@ -56,11 +52,9 @@
                 this.getData(page, this.tabConfig.currentIndex, mescroll)
             },
             getData (page, category, mescroll) {
-                this.$axios.get('/api/site/list', {
-                    params: {
-                        index: (page.num - 1) * 10 + 1,
-                        category
-                    }
+                this.$axios.post('/api/example/list', {
+                    index: (page.num - 1) * 10 + 1,
+                    category
                 }).then((res) => {
                     let { code, data } = res.data
                     if (code === 0) {
@@ -81,7 +75,7 @@
                 })
             },
             changeTab (index) {
-                this.$store.commit('siteTabConfig', {
+                this.$store.commit('exampleTabConfig', {
                     currentIndex: index
                 })
 
@@ -91,7 +85,7 @@
                 })
             },
             goTarget (item) {
-                this.$router.push({ path: `/webView?url=${item.url}&title=${item.title}` })
+                this.$router.push(`/example/${item.id}`)
             }
         },
         beforeDestroy () {
@@ -103,10 +97,9 @@
         components: {
             MescrollComponent,
             HeaderComponent,
-            MenuComponent,
             TabComponent,
             ListComponent,
-            NothingComponent,
+            NothingComponent
         }
     };
 </script>

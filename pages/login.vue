@@ -63,8 +63,12 @@
                         this.$toast.show(msg)
                         this.$store.commit('isLogin', true)
 
-                        let path = this.$route.query.redirect || '/'
-                        this.$router.replace(path)
+                        let path = this.$route.query.redirect
+                        if (path) {
+                            this.$router.replace(path)
+                        } else {
+                            this.$router.go(-1)
+                        }
                     }
                 }).catch((error) => {
                     console.log(error);

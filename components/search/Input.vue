@@ -3,7 +3,7 @@
         <div class="model-cont">
             <div class="select" @click="doAction('select', null)">{{typeName}}</div>
             <input class="input" type="text" v-model="text" placeholder="搜索感兴趣的前端文章和网站" />
-            <button class="submit icon-search" title="GO" @click="doAction('search', text)"></button>
+            <button class="submit icon-search" title="GO" @click="doAction('search', { title: text, typeName })"></button>
         </div>
     </div>
 </template>

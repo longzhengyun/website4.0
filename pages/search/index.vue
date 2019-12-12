@@ -5,7 +5,9 @@
         <mescroll-component :down="mescrollDown" :up="mescrollUp" @init="mescrollInit">
             <list-component v-if="list.length > 0" :data="list" :doAction="goTarget" />
             <history-component v-if="showHistory" :data="historyData" :doAction="doSearch" />
+            <nothing-component v-if="!showHistory && list.length === 0" />
         </mescroll-component>
+        <button class="sumbit-btn border-top-line border-bottom-line" v-if="showHistory" @click="clearAction">清空历史搜索</button>
         <select-component v-show="showSelect" :data="selectConfig" :type="type" :doAction="doSelect" />
     </section>
 </template>
@@ -16,6 +18,7 @@
     import HeaderComponent from '~/components/common/Header'
     import SelectComponent from '~/components/common/Select'
     import ListComponent from '~/components/common/List'
+    import NothingComponent from '~/components/common/Nothing'
     import InputComponent from '~/components/search/Input'
     import HistoryComponent from '~/components/search/History'
 
@@ -35,6 +38,7 @@
                 mescrollUp: {
                     auto: false,
                     callback: this.upCallback,
+                    noMoreSize: 10,
                     htmlNodata: '<p class="upwarp-nodata">没有更多数据了!</p>'
                 },
                 mescrollDown: {
@@ -82,7 +86,7 @@
                         this.list = this.list.concat(data)
 
                         this.$nextTick(() => {
-                            this.doHistoryData('set', keyword) // 本地存储搜索关键字
+                            this.doHistoryData('set', { title: keyword, type, typeName: this.typeName }) // 本地存储搜索关键字
                             mescroll.endSuccess(data.length)
                         })
                     } else {
@@ -105,25 +109,33 @@
                     // 本地存储搜索记录
                     let isRecorded = false
                     this.historyData.map(item => {
-                        if (item.title.toUpperCase() === value.toUpperCase()) { // 不区分大小写
+                         // 搜索内容不区分大小写
+                        if (item.title.toUpperCase() === value.title.toUpperCase() && item.type === value.type) {
                             isRecorded = true
                         }
                     })
 
                     if (!isRecorded) {
-                        this.historyData.unshift({ title: value })
-                        localStorage.setItem('historySearch', JSON.stringify(this.historyData))
+                        this.historyData.unshift(value)
+                        window.localStorage.setItem('historySearch', JSON.stringify(this.historyData))
                     }
                 }
             },
-            doSearch(key, keyword) {
+            doSearch(key, item) {
                 if (key === 'select') {
                     this.showSelect = true
                 }
 
-                if (key === 'search' && keyword) {
-                    this.keyword = keyword
+                if (key === 'search' && item) {
                     this.list = []
+
+                    this.keyword = item.title
+                    if (item.type) {
+                        this.type = item.type
+                    }
+                    if (item.typeName) {
+                        this.typeName = item.typeName
+                    }
 
                     this.mescroll.resetUpScroll()
                     this.mescroll.scrollTo(0, 0)
@@ -145,6 +157,11 @@
                     this.type = item.type
                     this.typeName = item.typeName
                 }
+            },
+            clearAction () {
+                this.historyData = [] // 清空历史搜索列表数据
+                this.showHistory = false // 隐藏历史搜索列表
+                window.localStorage.removeItem('historySearch') // 清空本地存储数据
             }
         },
         beforeDestroy () {
@@ -158,8 +175,13 @@
             HeaderComponent,
             SelectComponent,
             ListComponent,
+            NothingComponent,
             InputComponent,
             HistoryComponent,
         }
     };
 </script>
+
+<style scoped>
+    .sumbit-btn{position:relative;display:block;width:100%;padding:.25rem 0;background-color:#fff;text-align:center;color:#333;}
+</style>

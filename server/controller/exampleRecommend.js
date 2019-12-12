@@ -1,8 +1,8 @@
 const mysql = require('./../mysql')
 
 module.exports = async function (ctx) {
-    const { query } = ctx.request;
-    const { id = 0, category = '', limit = 6 } = query;
+    const { body } = ctx.request;
+    const { id = 0, belong = '', limit = 6 } = body;
 
     let result = {
         code: -1,
@@ -11,12 +11,12 @@ module.exports = async function (ctx) {
     }
 
     let sqlString = '';
-    if (category) {
-        sqlString = `WHERE category='${category}'`;
+    if (belong) {
+        sqlString = `WHERE belong='${belong}'`;
     }
 
     try {
-        let data = await mysql.query(`SELECT id, title, hot FROM article_data ${sqlString} AND id!=${id} LIMIT 0, ${limit}`);
+        let data = await mysql.query(`SELECT id, title, hot FROM case_data ${sqlString} AND id!='${id}' LIMIT 0, ${limit}`);
         if (Array.isArray(data) && data.length > 0) {
             result.code = 0;
             result.msg = '成功';
@@ -25,11 +25,7 @@ module.exports = async function (ctx) {
             result.msg = '查无数据';
         }
     } catch (error) {
-        if (!Number.isSafeInteger(Number(id)) || Number(id) < 0) {
-            result.msg = '参数出错: id';
-        } else {
-            result.msg = error;
-        }
+        result.msg = error;
     }
 
     ctx.body = result

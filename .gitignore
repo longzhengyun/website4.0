@@ -91,3 +91,5 @@ sw.*
 
 server/config
 static/content
+static/example
+static/app

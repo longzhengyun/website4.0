@@ -3,7 +3,7 @@
         <header-component :data="headerConfig" />
         <section class="mescroll">
             <detail-component :data="detailData" />
-            <recommend-component :data="recommendData" :doAction="goTarget" />
+            <recommend-component v-if="recommendData.item.length > 0" :data="recommendData" :doAction="goTarget" />
         </section>
     </section>
 </template>
@@ -24,6 +24,7 @@
 
             let recommendData = {
                 name: '相关文章',
+                type: 'article',
                 item: [],
             }
             let articleRecommend = (await $axios.get('/api/article/recommend', { params: { id: params.id, category: detailData.category } })).data

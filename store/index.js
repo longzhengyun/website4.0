@@ -68,6 +68,23 @@ export const state = () => ({
             },
         ],
     },
+    exampleTabConfig: {
+        currentIndex: 0,
+        item: [
+            {
+                name: '全部',
+                index: 0
+            },
+            {
+                name: 'Mobile',
+                index: 1
+            },
+            {
+                name: 'PC',
+                index: 2
+            },
+        ],
+    },
 })
 
 export const mutations = {
@@ -79,6 +96,9 @@ export const mutations = {
     },
     siteTabConfig(state, data) {
         Object.assign(state.siteTabConfig, data)
+    },
+    exampleTabConfig(state, data) {
+        Object.assign(state.exampleTabConfig, data)
     },
 }
 

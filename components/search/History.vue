@@ -2,7 +2,7 @@
     <div class="model-wrap border-top-line">
         <h2 class="model-title">历史搜索</h2>
         <ul class="model-cont">
-            <li class="model-item" :class="{ 'border-top-line' : key > 0 }" v-for="(item, key) in data" :key="key" @click="doAction('search', item.title)">{{item.title}}</li>
+            <li class="model-item" :class="{ 'border-top-line' : key > 0 }" v-for="(item, key) in data" :key="key" @click="doAction('search', item)">{{item.title}}</li>
         </ul>
     </div>
 </template>

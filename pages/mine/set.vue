@@ -15,7 +15,7 @@
     export default {
         async asyncData ({ $axios }) {
             let userData = []
-            let { code, data } = (await $axios.get('/api/auth/user')).data
+            let { code, data } = (await $axios.post('/api/auth/user')).data
 
             if (code === 0) {
                 userData = [
