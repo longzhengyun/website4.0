@@ -91,7 +91,7 @@
                 })
             },
             goTarget (item) {
-                this.$router.push({ path: `/webView?url=${item.url}&title=${item.title}` })
+                this.$GoTarget(item.url, item.title)
             }
         },
         beforeDestroy () {

@@ -57,17 +57,22 @@
         },
         methods: {
             goTarget (type, item) {
+                let path = ''
+                let title = ''
                 if (type === 'search') {
-                    this.$router.push('/search')
+                    path = '/search'
                 }
 
                 if (type === 'article') {
-                    this.$router.push(`/article/${item.id}`)
+                    path = `/article/${item.id}`
                 }
 
                 if (type === 'site') {
-                    this.$router.push({ path: `/webView?url=${item.url}&title=${item.title}` })
+                    path = item.url
+                    title = item.title
                 }
+
+                this.$GoTarget(path, title)
             }
         },
         components: {

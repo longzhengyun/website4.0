@@ -7,7 +7,7 @@
             </div>
             <form-component :data="baseData" nameLength="4" :doAction="goTarget" />
             <form-component :data="detailData" nameLength="4" />
-            <option-component :data="optionData" :doAction="goTarget" />
+            <option-component class="option-hack" :data="optionData" :doAction="goTarget" />
         </section>
     </section>
 </template>
@@ -74,11 +74,7 @@
         },
         methods: {
             goTarget (route) {
-                if (route.indexOf('http') === 0) {
-                    window.location.href = route
-                } else {
-                    this.$router.push(route)
-                }
+                this.$GoTarget(route)
             }
         },
         components: {
@@ -91,4 +87,6 @@
 
 <style scoped>
     .my-photo{width:2.4rem;height:2.4rem;border-radius:100%;margin:.2rem auto;overflow:hidden;}
+
+    .option-hack{margin-bottom: 0;}
 </style>

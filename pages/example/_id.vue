@@ -70,7 +70,7 @@
 
                 if (type === 'page') {
                     if (item.url.substring(item.url.length - 5) === '.html') {
-                        this.$router.push({ path: `/webView?url=${window.location.origin}/example/${item.url}&title=${item.title}` })
+                        this.$GoTarget(`${window.location.origin}/example/${item.url}`, item.title)
                     } else {
                         this.$toast.show('该页面为后端html模板，暂不支持预览')
                     }

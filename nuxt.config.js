@@ -11,7 +11,7 @@ module.exports = {
         title: process.env.npm_package_name || '',
         meta: [
             { charset: 'utf-8' },
-            { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no' },
+            { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=no, minimal-ui' },
             { name: 'apple-mobile-web-app-capable', content: 'yes' },
             { name: 'apple-mobile-web-app-status-bar-style', content: 'white' },
             { name: 'format-detection', content: 'email=no, telephone=no' },
@@ -60,6 +60,10 @@ module.exports = {
         '@nuxtjs/pwa',
         '@nuxtjs/toast',
     ],
+    server: {
+        port: process.env.PORT || 3000,
+        host: '0.0.0.0'
+    },
     /*
     ** Axios module configuration
     ** See https://axios.nuxtjs.org/options

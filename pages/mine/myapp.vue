@@ -40,7 +40,7 @@
         methods: {
             goTarget (route) {
                 if (route === 'Download') {
-                    window.location.href = 'http://wwww.jary8.com'
+                    this.$GoTarget('http://wwww.jary8.com')
                 }
             }
         },

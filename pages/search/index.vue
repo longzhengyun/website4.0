@@ -142,13 +142,18 @@
                 }
             },
             goTarget (item) {
+                let path = ''
+                let title = ''
                 if (this.type === 'article') {
-                    this.$router.push(`/article/${item.id}`)
+                    path = `/article/${item.id}`
                 }
 
                 if (this.type === 'site') {
-                    this.$router.push({ path: `/webView?url=${item.url}&title=${item.title}` })
+                    path = item.url
+                    title = item.title
                 }
+
+                this.$GoTarget(path, title)
             },
             doSelect (item) {
                 this.showSelect = false
