@@ -11,7 +11,7 @@
 <script>
     import HeaderComponent from '~/components/common/Header'
     import RecommendComponent from '~/components/common/Recommend'
-    import DetailComponent from '~/components/article/detail'
+    import DetailComponent from '~/components/article/Detail'
 
     export default {
         async asyncData ({ params, $axios }) {

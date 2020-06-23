@@ -14,7 +14,8 @@
     export default {
         async asyncData () {
             let versionData = [
-                { name: '2020.4', value: '佳瑞网V4.0上线。使用技术包括：HTML5、CSS3、VueJS、NodeJS、MySQL等。新版佳瑞网放弃兼容PC端，以纯webApp模式，使用基于VueJS的Nuxt框架构建。', multi: true, },
+                { name: '2020.6', value: '佳瑞网V4.0上线。使用技术包括：HTML5、CSS3、VueJS、NodeJS、MySQL等。新版佳瑞网放弃兼容PC端，以纯webApp模式，使用基于VueJS的Nuxt框架构建。', multi: true, },
+                { name: '2018', value: '使用Vue框架升级网站，重新设计整个网站的架构。', multi: true, },
                 { name: '2017.6', value: '佳瑞网APP V1.0 Android版发布。使用技术包括：React Native、JavaScript等。', multi: true, },
                 { name: '2016.8', value: '佳瑞网V3.0上线。使用技术包括：HTML5、CSS3、AngularJS、JavaScript、PHP等。新版采用移动端优先，PC端兼容的模式，以AngularJS为基础，更新了整个网站。', multi: true, },
                 { name: '2015', value: '为了应用新的技术，再次升级佳瑞网的计划也提上日程。', multi: true, },

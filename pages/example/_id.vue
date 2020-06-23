@@ -12,7 +12,7 @@
 <script>
     import HeaderComponent from '~/components/common/Header'
     import RecommendComponent from '~/components/common/Recommend'
-    import DetailComponent from '~/components/example/detail'
+    import DetailComponent from '~/components/example/Detail'
 
     export default {
         async asyncData ({ params, $axios }) {
