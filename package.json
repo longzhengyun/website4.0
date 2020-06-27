@@ -1,7 +1,7 @@
 {
     "name": "website",
     "version": "4.0.0",
-    "description": "My incredible Nuxt.js project",
+    "description": "个人网站，记录及分享前端开发相关内容。",
     "author": "Jary",
     "private": true,
     "scripts": {

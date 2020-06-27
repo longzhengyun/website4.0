@@ -92,5 +92,22 @@ module.exports = {
     toast: {
         position: 'center',
         duration: '1000'
-    }
+    },
+    // pwa相关配置
+    manifest: {
+        name: '佳瑞网-个人网站',
+        short_name: '佳瑞网',
+        lang: 'zh-Hant',
+        display: 'fullscreen',
+        start_url: '/',
+        theme_color: '#c00',
+        background_color: '#fff',
+        icons: [
+            {
+                src: '/img/icon.png',
+                sizes: '512x512',
+                type: 'image/png'
+            }
+        ]
+    },
 }

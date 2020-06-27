@@ -37,6 +37,7 @@
                 mescroll: null,
                 mescrollUp: {
                     auto: false,
+                    isLock: true,
                     callback: this.upCallback,
                     noMoreSize: 10,
                     htmlNodata: '<p class="upwarp-nodata">没有更多数据了!</p>'
@@ -126,7 +127,7 @@
                     this.showSelect = true
                 }
 
-                if (key === 'search' && item) {
+                if (key === 'search' && item && item.title.length > 0) {
                     this.list = []
 
                     this.keyword = item.title
@@ -137,6 +138,7 @@
                         this.typeName = item.typeName
                     }
 
+                    this.mescroll.lockUpScroll(false)
                     this.mescroll.resetUpScroll()
                     this.mescroll.scrollTo(0, 0)
                 }

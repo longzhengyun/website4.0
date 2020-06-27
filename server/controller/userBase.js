@@ -8,8 +8,7 @@ module.exports = async function (ctx) {
     }
 
     try {
-        // let data = await mysql.query('SELECT nickname, email, city, job, motto FROM user_data');
-        let data = await mysql.query('SELECT nickname, email FROM user_data');
+        let data = await mysql.query('SELECT nickname, email, city, job, motto FROM user_data');
         if (Array.isArray(data) && data.length > 0) {
             result.code = 0;
             result.msg = '成功';
