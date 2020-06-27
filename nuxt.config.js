@@ -100,7 +100,7 @@ module.exports = {
         lang: 'zh-Hant',
         display: 'fullscreen',
         start_url: '/',
-        theme_color: '#c00',
+        theme_color: '#fff',
         background_color: '#fff',
         icons: [
             {
