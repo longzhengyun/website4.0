@@ -1,6 +1,6 @@
 {
     "name": "website",
-    "version": "4.0.1",
+    "version": "4.0.2",
     "description": "个人网站，记录及分享前端开发相关内容。",
     "author": "Jary",
     "private": true,

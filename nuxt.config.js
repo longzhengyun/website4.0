@@ -111,4 +111,13 @@ module.exports = {
             }
         ]
     },
+    workbox: {
+        cacheNames: {
+            suffix: process.env.npm_package_version
+        },
+        cacheOptions: {
+            cacheId: process.env.npm_package_name,
+            revision: process.env.npm_package_version
+        }
+    }
 }
