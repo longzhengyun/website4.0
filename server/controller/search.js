@@ -1,4 +1,4 @@
-const mysql = require('./../mysql');
+const { databaseQuery } = require('./../config');;
 
 module.exports = async function (ctx) {
     const { query } = ctx.request;
@@ -24,7 +24,7 @@ module.exports = async function (ctx) {
     }
 
     try {
-        let data = await mysql.query(`SELECT id, title FROM ${table} WHERE title LIKE '%${keyword}%' ORDER BY id DESC LIMIT ${listIndex}, ${limit}`);
+        let data = await databaseQuery(`SELECT id, title FROM ${table} WHERE title LIKE '%${keyword}%' ORDER BY id DESC LIMIT ${listIndex}, ${limit}`);
         if (Array.isArray(data) && data.length > 0) {
             result.code = 0;
             result.msg = '成功';

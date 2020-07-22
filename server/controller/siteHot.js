@@ -1,4 +1,4 @@
-const mysql = require('./../mysql')
+const { databaseQuery } = require('./../config');
 
 module.exports = async function (ctx) {
     let result = {
@@ -8,7 +8,7 @@ module.exports = async function (ctx) {
     }
 
     try {
-        let data = await mysql.query(`SELECT id, title, hot, url FROM site_data WHERE hot='y' ORDER BY id DESC LIMIT 6`);
+        let data = await databaseQuery(`SELECT id, title, hot, url FROM site_data WHERE hot='y' ORDER BY id DESC LIMIT 6`);
         if (Array.isArray(data) && data.length > 0) {
             result.code = 0;
             result.msg = '成功';

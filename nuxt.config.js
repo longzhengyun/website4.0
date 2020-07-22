@@ -1,6 +1,7 @@
 
 module.exports = {
     mode: 'universal',
+    telemetry: false, // 关闭收集测试报告提问
     /*
     ** Headers of the page
     */
@@ -95,7 +96,7 @@ module.exports = {
     },
     // pwa相关配置
     manifest: {
-        name: '佳瑞网-个人网站',
+        name: '佳瑞网-前端开发',
         short_name: '佳瑞网',
         lang: 'zh-Hant',
         display: 'fullscreen',

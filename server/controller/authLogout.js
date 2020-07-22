@@ -1,9 +1,8 @@
-const mysql = require('./../mysql')
 const Promise = require('bluebird');
 const jwt = require('jsonwebtoken');
 
 const verify = Promise.promisify(jwt.verify);
-const { secret } = require('./../config');
+const { secret, databaseQuery } = require('./../config');
 const { GetCookie } = require('./../middleware/utils');
 
 module.exports = async function (ctx) {
@@ -19,7 +18,7 @@ module.exports = async function (ctx) {
         // 解码
         let { userid } = await verify(token, secret);
 
-        let data = await mysql.query(`SELECT id, nickname FROM admin_data WHERE id='${userid}'`);
+        let data = await databaseQuery(`SELECT id, nickname FROM admin_data WHERE id='${userid}'`);
         if (Array.isArray(data) && data.length > 0) {
             ctx.cookies.set('token', '', {
                 maxAge: 0

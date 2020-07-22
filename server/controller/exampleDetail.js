@@ -1,4 +1,4 @@
-const mysql = require('./../mysql')
+const { databaseQuery } = require('./../config');
 const { FormatDate } = require('./../middleware/utils');
 
 module.exports = async function (ctx) {
@@ -12,7 +12,7 @@ module.exports = async function (ctx) {
     }
 
     try {
-        let data = await mysql.query(`SELECT * FROM case_data WHERE id='${id}'`);
+        let data = await databaseQuery(`SELECT * FROM case_data WHERE id='${id}'`);
         if (Array.isArray(data) && data.length > 0) {
             data[0].date = FormatDate(new Date(data[0].date), 'yyyy-MM-dd');
 

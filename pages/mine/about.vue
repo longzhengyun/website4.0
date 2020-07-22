@@ -18,7 +18,7 @@
         async asyncData () {
             let baseData = [
                 { name: '版本', value: `V ${version}`, route: '/mine/version' },
-                { name: '应用技术', value: 'HTML5、CSS3、VUE、NODE、MYSQL等', multi: true },
+                { name: '应用技术', value: 'HTML5、CSS3、VUE、NODE、SQLITE等', multi: true },
             ];
 
             let moreData = [

@@ -1,4 +1,4 @@
-const mysql = require('./../mysql')
+const { databaseQuery } = require('./../config');
 
 module.exports = async function (ctx) {
     const { query } = ctx.request;
@@ -16,7 +16,7 @@ module.exports = async function (ctx) {
     }
 
     try {
-        let data = await mysql.query(`SELECT id, title, hot FROM article_data ${sqlString} AND id!=${id} LIMIT 0, ${limit}`);
+        let data = await databaseQuery(`SELECT id, title, hot FROM article_data ${sqlString} AND id!=${id} LIMIT 0, ${limit}`);
         if (Array.isArray(data) && data.length > 0) {
             result.code = 0;
             result.msg = '成功';

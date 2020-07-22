@@ -1,7 +1,6 @@
-const mysql = require('./../mysql')
 const jwt = require('jsonwebtoken')
 
-const { secret } = require('./../config');
+const { secret, databaseQuery } = require('./../config');
 
 module.exports = async function (ctx) {
     const { body } = ctx.request;
@@ -14,7 +13,7 @@ module.exports = async function (ctx) {
     }
 
     try {
-        let data = await mysql.query(`SELECT * FROM admin_data WHERE username='${username}'`);
+        let data = await databaseQuery(`SELECT * FROM admin_data WHERE username='${username}'`);
         if (Array.isArray(data) && data.length > 0) {
             let res = data[0];
             if (res.password === password) {
