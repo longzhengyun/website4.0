@@ -16,15 +16,17 @@ module.exports = async function (ctx) {
     }
 
     let table = '';
+    let sqlString = '';
     if (type === 'article') {
         table = 'article_data';
     }
     if (type === 'site') {
         table = 'site_data';
+        sqlString = ', url';
     }
 
     try {
-        let data = await databaseQuery(`SELECT id, title FROM ${table} WHERE title LIKE '%${keyword}%' ORDER BY id DESC LIMIT ${listIndex}, ${limit}`);
+        let data = await databaseQuery(`SELECT id, title${sqlString} FROM ${table} WHERE title LIKE '%${keyword}%' ORDER BY id DESC LIMIT ${listIndex}, ${limit}`);
         if (Array.isArray(data) && data.length > 0) {
             result.code = 0;
             result.msg = '成功';
